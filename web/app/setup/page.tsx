@@ -17,7 +17,8 @@ export default function SetupPage() {
   const [baseURL, setBaseURL] = useState("");
   const [model, setModel] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [downloading, setDownloading] = useState<{ done: number; total: number } | null>(null);
+  const [downloading, setDownloading] = useState<{ done: number; total: number; current?: string } | null>(null);
+  const [cached, setCached] = useState<{ count: number; total: number } | null>(null);
   const [intake, setIntake] = useState("");
   const [generating, setGenerating] = useState(false);
   const [theme, setThemeState] = useState<Theme>("system");
@@ -37,6 +38,7 @@ export default function SetupPage() {
       setStartDate(s.startDate ?? new Date().toISOString().slice(0, 10));
       setIntake(p?.rawIntake ?? "");
       setThemeState(getStoredTheme());
+      refreshCachedCount();
     })();
   }, []);
 
@@ -55,22 +57,58 @@ export default function SetupPage() {
     flash("Saved.");
   }
 
+  async function refreshCachedCount() {
+    if (typeof caches === "undefined") return;
+    try {
+      const idx = await loadDaysIndex();
+      const urls = idx.days
+        .map((d) => audioUrlForDay(d))
+        .filter((u): u is string => !!u);
+      let hits = 0;
+      for (const url of urls) {
+        const match = await caches.match(url);
+        if (match) hits++;
+      }
+      setCached({ count: hits, total: urls.length });
+    } catch {
+      /* ignore */
+    }
+  }
+
   async function downloadAllAudio() {
     const idx = await loadDaysIndex();
-    const urls = idx.days
-      .map((d) => audioUrlForDay(d))
-      .filter((u): u is string => !!u);
-    setDownloading({ done: 0, total: urls.length });
-    for (let i = 0; i < urls.length; i++) {
+    const items: { url: string; label: string }[] = idx.days
+      .filter((d) => !!d.audio_file)
+      .map((d) => ({
+        url: audioUrlForDay(d) || "",
+        label: `Day ${d.day}`,
+      }));
+    setDownloading({ done: 0, total: items.length });
+    for (let i = 0; i < items.length; i++) {
+      setDownloading({ done: i, total: items.length, current: items[i].label });
       try {
-        await fetch(urls[i], { cache: "force-cache" });
+        await fetch(items[i].url, { cache: "force-cache" });
       } catch {
         /* ignore individual failures */
       }
-      setDownloading({ done: i + 1, total: urls.length });
+      setDownloading({ done: i + 1, total: items.length });
     }
-    setTimeout(() => setDownloading(null), 1500);
+    await refreshCachedCount();
+    setTimeout(() => setDownloading(null), 1200);
     flash("Audio downloaded.");
+  }
+
+  async function clearCachedAudio() {
+    if (!confirm("Clear all cached audio? You'll need to re-download to listen offline.")) return;
+    if (typeof caches === "undefined") return;
+    const cacheNames = await caches.keys();
+    for (const name of cacheNames) {
+      if (name.startsWith("ppii-audio")) {
+        await caches.delete(name);
+      }
+    }
+    await refreshCachedCount();
+    flash("Cleared.");
   }
 
   async function distillFromIntake(text: string): Promise<string> {
@@ -280,17 +318,53 @@ Write in second person ("you are…", "your highest-lever work is…"). Be speci
       <section className="mb-10 pt-6 border-t border-line">
         <h2 className="text-lg font-semibold mb-2">Offline audio</h2>
         <p className="text-sm text-muted mb-3">
-          Download all 20 sessions (~820 MB) for offline listening on the go.
+          Download all 20 sessions (~360 MB) for offline listening.
         </p>
-        <button
-          disabled={!!downloading}
-          onClick={downloadAllAudio}
-          className="px-4 py-2 rounded-lg bg-elevate border border-line text-sm font-medium disabled:opacity-50"
-        >
-          {downloading
-            ? `Downloading ${downloading.done}/${downloading.total}…`
-            : "↓ Download full program"}
-        </button>
+
+        {cached && (
+          <div className="mb-3 flex items-center gap-2 text-sm">
+            {cached.count === 0 && (
+              <span className="text-faint">Nothing cached yet.</span>
+            )}
+            {cached.count > 0 && cached.count < cached.total && (
+              <span className="text-warn-ink">
+                ⚠ {cached.count} / {cached.total} cached — partial.
+              </span>
+            )}
+            {cached.count === cached.total && (
+              <span className="text-ok font-medium">
+                ✓ All {cached.total} sessions cached for offline.
+              </span>
+            )}
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-2">
+          <button
+            disabled={!!downloading}
+            onClick={downloadAllAudio}
+            className="px-4 py-2 rounded-lg bg-elevate border border-line text-sm font-medium disabled:opacity-50"
+          >
+            {downloading
+              ? `Downloading ${downloading.done}/${downloading.total}${
+                  downloading.current ? ` · ${downloading.current}` : ""
+                }…`
+              : cached && cached.count === cached.total
+                ? "↻ Re-download"
+                : cached && cached.count > 0
+                  ? "↓ Resume / fill gaps"
+                  : "↓ Download full program"}
+          </button>
+          {cached && cached.count > 0 && !downloading && (
+            <button
+              onClick={clearCachedAudio}
+              className="px-3 py-2 rounded-lg text-sm font-medium text-faint hover:text-danger"
+            >
+              Clear cache
+            </button>
+          )}
+        </div>
+
         {downloading && (
           <div className="mt-3 h-1.5 bg-elevate rounded-full overflow-hidden border border-line">
             <div
