@@ -1,0 +1,93 @@
+{
+  "day": 10,
+  "videoId": "d8dHB8jgpIY",
+  "covers": [12, 13, 14],
+  "title": "Creating Your Future — The Goal Setting Workshop",
+  "duration_seconds": 3507,
+  "summary": "The workshop session. You produce three lists at speed — personal development, things, economic — without filtering or being practical. Then you tag timelines, pick three one-year goals from each list, and write the why behind each. Two principles run through it: clarity is power, and never leave the site of a goal without taking immediate action toward it. The point of the workshop isn't to plan; it's to commit.",
+  "keypoints": [
+    {
+      "title": "Write fast, write outrageous, edit later",
+      "body": "Adults filter every want before it lands on the page ('we can't afford that', 'that's not realistic'). The workshop deliberately bypasses that filter — write like a kid making a Christmas list. Practical comes after the brain has actually expressed what it wants."
+    },
+    {
+      "title": "Three categories, in this order — personal development, things, economic",
+      "body": "Personal development first because it's the biggest determinant of long-term satisfaction (skills, character, who you become). Things second because it's where most people get squeamish and stop. Economic last because it tends to dominate if put first. Doing them in this order forces a balanced spread."
+    },
+    {
+      "title": "Tag every goal with a timeline (1, 3, 5, 10, 20 years)",
+      "body": "A goal without a deadline is a wish. The timeline doesn't have to be 'realistic' — it's a commitment marker. The faster the timeline you can defend, the higher the priority."
+    },
+    {
+      "title": "Pick three one-year goals per category — and write the why for each",
+      "body": "Nine goals total, each with a written paragraph of why you must hit it. The why is the load-bearing piece. Without it the goal is a sentence; with it, it's a commitment."
+    },
+    {
+      "title": "Never leave the site of a goal without taking an action",
+      "body": "The single most important habit Tony names. The moment you set a goal, do something concrete toward it — make the call, send the email, put down the deposit, sign up for the class — within the next 12-24 hours. Momentum is more important than perfection on the first move."
+    },
+    {
+      "title": "Make the goal real in your nervous system, as if it's already happened",
+      "body": "Visualize the achieved state vividly enough that part of your brain stops distinguishing between 'goal' and 'memory'. This isn't magical thinking — it's how the brain conditions toward what's already 'real' to it. Most goals fail because they remain abstract."
+    },
+    {
+      "title": "The Rocking Chair Test — decide from age 90",
+      "body": "When uncertain about a goal, project to 85 or 90 in your rocking chair. Look back from there: how do you feel about a life that included this vs. didn't? The answer collapses most ambivalence in seconds."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Goal Setting Workshop",
+      "description": "The full sequence Tony runs. Block 60-90 minutes. Don't do it in the car, on a phone, or with notifications on.",
+      "steps": [
+        {"name": "Personal development brainstorm — 6 minutes, no filter", "detail": "Skills, traits, fears to conquer, places to go, books to read, languages, character work, contribution. Write fast. Don't edit."},
+        {"name": "Things brainstorm — ~3 minutes, no filter", "detail": "Cars, homes, experiences, gear, gifts. Permission to be materialistic. Don't moralize."},
+        {"name": "Economic brainstorm — ~2 minutes", "detail": "Monthly income, annual income, net worth, business goals, investments, giving, retirement. Specific numbers."},
+        {"name": "Timeline tag", "detail": "Next to each goal: 1, 3, 5, 10, or 20 years."},
+        {"name": "Pick three one-year goals from each category", "detail": "Nine total. Write each on a separate page."},
+        {"name": "Write the why under each", "detail": "A paragraph. Include both gain and cost-of-not. Strong enough to drive action on a tired Tuesday."},
+        {"name": "Take immediate action on each — within 24 hours", "detail": "Concrete, specific, today or tomorrow morning. Don't leave the site of the goal without one."}
+      ]
+    },
+    {
+      "name": "The Rocking Chair Test",
+      "description": "Decision tool for any goal you're ambivalent about.",
+      "steps": [
+        {"name": "Project to 85-90 years old, in the rocking chair, looking back", "detail": "Make it visual. You're done. The question is what you remember."},
+        {"name": "Scenario A: you didn't pursue this goal", "detail": "What's the regret? What did you give up? Feel it."},
+        {"name": "Scenario B: you did pursue and achieve it", "detail": "What's the experience? What did it shape in you and the people around you?"},
+        {"name": "Decide", "detail": "If A creates significant regret and B creates significant peace/pride, the goal is real. Pursue it. If both feel neutral, drop it."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "This is the workshop, not a preview. Block real time — at least an hour, ideally 90 minutes. No phone. No interruptions. The output is nine one-year goals (three per category) with written why-paragraphs and one immediate action per goal taken inside 24 hours. Every later session in the program assumes you've done this.",
+    "questions": [
+      {
+        "id": "personal_dev",
+        "label": "Three one-year personal development goals — with the why for each",
+        "guidance": "Skills, character, fitness, experiences, who you're becoming. Apply the Reach lens where relevant: what version of you ships and scales? Pick goals that build that person."
+      },
+      {
+        "id": "things",
+        "label": "Three one-year thing goals — with the why for each",
+        "guidance": "Real, specific, concrete. Permission to want. Skip the bargaining ('I shouldn't want X')."
+      },
+      {
+        "id": "economic",
+        "label": "Three one-year economic goals — with the why for each",
+        "guidance": "Specific numbers — MRR, net worth, savings, giving. If your highest-lever work is Reach, anchor at least one of these to a Reach metric so the goal and the lever are aligned."
+      },
+      {
+        "id": "actions",
+        "label": "One concrete action per goal you'll take in the next 24 hours",
+        "guidance": "Make a call, place an order, send an intro, sign up, transfer money, draft the email. Action today, not 'soon'."
+      },
+      {
+        "id": "rocking_chair",
+        "label": "Rocking Chair Test on your top 3 goals — what's the regret if you don't, the pride if you do",
+        "guidance": "Don't summarize. Step into 90, look back, write what's there."
+      }
+    ]
+  }
+}

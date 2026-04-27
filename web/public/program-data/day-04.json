@@ -1,0 +1,80 @@
+{
+  "day": 4,
+  "videoId": "ithR1-mkrp8",
+  "covers": [4],
+  "title": "The Science of Success Conditioning — NAC",
+  "duration_seconds": 2505,
+  "summary": "Tony's central technology: Neuro-Associative Conditioning. Every form of therapy that works does the same three things — gets leverage, interrupts the old pattern, conditions a new one. Once you can run that loop on yourself you stop needing therapists, gurus, or hype. The conditioning frame matters: change isn't a one-shot reprogram, it's a piano that needs retuning. You hold a new state by practicing it daily, not by deciding it once.",
+  "keypoints": [
+    {
+      "title": "All change comes down to changing meaning",
+      "body": "Whether the tool is Gestalt, CBT, Rogerian, NLP — when therapy works, the moment of change is always the same: the person now associates a different meaning to a person, situation, or behavior. The technique is just a delivery vehicle for that. So the real skill is being able to shift meaning directly."
+    },
+    {
+      "title": "Conditioning, not programming",
+      "body": "Reprogram-once thinking is a trap. The piano metaphor: even after a perfect tuning, the wires drift back. So you tune again, more often at first, then less often as the new tension settles in. Treat self-change the same way — daily reps, not a single epiphany. This is why everything in this program is structured as something you do every day, not once."
+    },
+    {
+      "title": "Step 1: Leverage — must, not should",
+      "body": "Most people change at 'should' or 'could' or 'might' — and 'most people' don't change. The threshold is must: this must change, I must change it, and I can change it now. Tony forces this on every private client by refusing to work with anyone who isn't already there. The same gate applies to you — if it's still 'should', go back to yesterday's pain/pleasure work until it's 'must'."
+    },
+    {
+      "title": "Step 2: Interrupt the pattern",
+      "body": "Old reactions are grooved records — your brain plays the same one whenever a familiar trigger lands. To stop the loop, jolt it: do something unexpected enough that the record can't finish. The water-in-the-face story is theatrical, but the principle is right — the pattern needs to be broken, not reasoned with. For yourself, design absurd, physical, decisive interrupts ahead of time."
+    },
+    {
+      "title": "Step 3: Condition the new association",
+      "body": "After the interrupt, immediately install the replacement and rehearse it until the new response is automatic. Powerful state + new linkage + repetition = a new default. Without step 3, the interrupt fades and the old groove returns."
+    },
+    {
+      "title": "Without leverage, no technique works; with leverage, almost any technique works",
+      "body": "The TV phobia-cure story: same therapist, same method — the woman who came in with a $100 shopping spree and a freshly painted house on the line got cured in minutes; the man who didn't really want to change didn't, no matter what was tried. Skill in the method is secondary. Leverage is primary."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Neuro-Associative Conditioning (NAC)",
+      "description": "The three-step engine for any deliberate change. Use it on yourself, and use it to recognize what's actually happening when other change methods work.",
+      "steps": [
+        {"name": "Get leverage", "detail": "Reach 'must change, must change it, can change it now'. Use yesterday's pain/pleasure lever until you're at threshold — not 'should', not 'someday'."},
+        {"name": "Interrupt the limiting pattern", "detail": "Do something unexpected, physical, or absurd the moment the old reaction starts. Stand up, change rooms, splash water on your face, blurt a non-sequitur. The record has to skip."},
+        {"name": "Condition a new empowering association", "detail": "Immediately link the trigger to a new state — felt, not thought — and rep it. Visualize, vocalize, embody, repeat. Until the trigger reliably produces the new response, you're not done."}
+      ]
+    },
+    {
+      "name": "Conditioning vs. Programming (the piano)",
+      "description": "A frame that changes how you treat your own changes. Every important shift needs scheduled tune-ups — daily at first, then weekly, then quarterly — or it drifts back to the prior tension.",
+      "steps": [
+        {"name": "Initial change", "detail": "Make the shift consciously and visibly."},
+        {"name": "Frequent reinforcement", "detail": "Daily rehearsal in the first weeks while the new pattern is fragile."},
+        {"name": "Tapering reinforcement", "detail": "Less frequent but never zero. Even 'set' patterns need periodic re-tuning."},
+        {"name": "Lifestyle integration", "detail": "Eventually the new pattern is just how you operate — but it became that way through reps, not decision."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Take the four actions from yesterday and run NAC on each. Today is where you stop describing the problem and start rewriting it.",
+    "questions": [
+      {
+        "id": "leverage",
+        "label": "For each action — 10 reasons you must change this now",
+        "guidance": "Include both costs of inaction and gains from acting. Stop writing only when the answer to 'must I?' is unambiguously yes. If you can't get there, the action isn't actually high-leverage — pick a different one."
+      },
+      {
+        "id": "can",
+        "label": "For each — why you absolutely can change this now",
+        "guidance": "Evidence from your past, resources you have, people who've done it. The point is to make 'I can' as solid as 'I must'."
+      },
+      {
+        "id": "interrupts",
+        "label": "Four or five pattern interrupts you'll use when the old reaction starts",
+        "guidance": "Design them in advance. They should be physical, unexpected, slightly absurd — silly nose-grab, get up and walk outside, splash cold water, snap fingers and say a code word. Pick ones you'll actually use."
+      },
+      {
+        "id": "new_association",
+        "label": "The new association you'll condition for each action — and how you'll rehearse it",
+        "guidance": "Not a slogan. A felt experience: what you'll see, hear, and feel when you do this thing well. How many times will you rehearse it today? Tomorrow? This week?"
+      }
+    ]
+  }
+}

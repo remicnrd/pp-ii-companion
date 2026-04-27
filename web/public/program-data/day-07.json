@@ -1,0 +1,84 @@
+{
+  "day": 7,
+  "videoId": "IWrwb2mfnJY",
+  "covers": [9],
+  "title": "Values and Beliefs — The Source of Success or Failure",
+  "duration_seconds": 2582,
+  "summary": "Pain and pleasure drive you, but they get organized into specific labels — values — that you've ranked into a hierarchy you mostly didn't choose. Layered on top of that is a set of rules (beliefs) about what has to be true for those values to feel met. Mismatched values pull people apart; impossible rules guarantee they never feel successful. Surface them, then design them deliberately.",
+  "keypoints": [
+    {
+      "title": "Values are ranked emotional states",
+      "body": "When asked to pick between success, adventure, love, comfort, security, freedom — different people pick different ones, and the order matters more than the list. Two people with identical values in different orders make different decisions about everything."
+    },
+    {
+      "title": "Moving-toward and moving-away values both shape behavior",
+      "body": "You have a pleasure ladder (passion, freedom, contribution…) and a pain ladder (humiliation, rejection, depression…). The brain computes both simultaneously when deciding any action. Naming both is essential — most self-sabotage is your moving-away list quietly outweighing your moving-toward list."
+    },
+    {
+      "title": "Conflicting values are a hidden cause of self-sabotage",
+      "body": "If 'success' is your top moving-toward and 'rejection' or 'failure' is your top moving-away, you'll start to win and pull yourself back. The pattern isn't a character flaw; it's a value-system collision. Surface the conflict and you can resolve it deliberately."
+    },
+    {
+      "title": "Means values vs ends values",
+      "body": "Money, family, the business — these are means values. The end value is the state you're after through them (freedom, security, love, contribution). Mistaking the means for the end traps you: people grind for money for years and arrive at exactly the state they were running from. Always ask 'what would having this give me?' until you hit a feeling."
+    },
+    {
+      "title": "Beliefs are the rules you've set for hitting your values",
+      "body": "Globals ('life is…', 'people are…', 'I am…') and rules ('if X then Y'). The CEO who couldn't feel successful had impossible rules — $4M+ income, never feel down, fixed body fat. The bouncy guy felt successful daily because his rule was 'every day above ground'. Same value, different rule, completely different lived experience."
+    },
+    {
+      "title": "Most upsets are rule mismatches, not character flaws",
+      "body": "Tony and Becky both valued respect — but his rule was 'you must speak openly even if loud' and hers was 'never raise your voice'. Same value, opposite rules, frequent fights. Most relationship friction collapses once both sides surface and renegotiate the rules they didn't know they had."
+    },
+    {
+      "title": "Make it easy to win the game you're playing",
+      "body": "If your rule for success is 'achieve X and never feel down', you've designed a game you can't win. Tony's reframe: 'if I learned something, I succeeded'. That's not lowering the bar — it's removing the rule that makes daily progress invisible. Pick rules that let you win on a Tuesday."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Values Hierarchy (towards / away)",
+      "description": "A diagnostic for surfacing what's actually steering your decisions, in priority order.",
+      "steps": [
+        {"name": "Ask: 'what's most important to me in [life / business / relationship]?'", "detail": "List the answers. Reject means values (money, family, the business) — convert each into the end-state it represents."},
+        {"name": "Rank them", "detail": "Top to bottom, by priority. The order is more important than the list."},
+        {"name": "Ask: 'what feelings would I do almost anything to avoid?'", "detail": "Rank these too. Rejection, embarrassment, failure, boredom, shame."},
+        {"name": "Look for collisions", "detail": "Where does a high moving-toward value clash with a high moving-away value? That's where self-sabotage lives."}
+      ]
+    },
+    {
+      "name": "Beliefs — Globals and Rules",
+      "description": "The structure of every belief you hold. Knowing the structure lets you edit it.",
+      "steps": [
+        {"name": "Globals", "detail": "'Life is…', 'People are…', 'I am…'. Sweeping generalizations. Surface the loud ones — they govern your default reactions."},
+        {"name": "Rules", "detail": "'If X then Y'. The conditions you've set for any value to count as met. 'If I make $X then I'm successful.' 'If they don't text back, they don't care.'"},
+        {"name": "Rule audit", "detail": "For each top value, write the rule you currently use. Ask: does this rule make winning the game possible most days, or rarely? If rarely, redesign it."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "This is a lot — give it real time. The point is to see, for the first time, the actual operating system you've been running. Don't just identify; rank, surface conflicts, and start rewriting the worst rules.",
+    "questions": [
+      {
+        "id": "towards",
+        "label": "Your moving-toward values, in order — for life and for your work / Reach engine specifically",
+        "guidance": "End-states only. If you write 'money' or 'the business', ask 'what would that give me?' until you hit a feeling."
+      },
+      {
+        "id": "away",
+        "label": "Your moving-away values, in order",
+        "guidance": "Be honest about the ones you'd rather not name. Failure-in-public, looking foolish, being dependent — these are the ones that quietly stop action."
+      },
+      {
+        "id": "conflicts",
+        "label": "Where do those two lists collide?",
+        "guidance": "If your top toward is 'impact' and your top away is 'judgment', you've found a self-sabotage axis. Name it."
+      },
+      {
+        "id": "rules",
+        "label": "For each top value, the current rule you use to know it's met — and a better rule that makes winning more achievable without lowering the standard",
+        "guidance": "Bad rule: 'I'm successful if Reach hits $X MRR'. Better rule: 'I'm successful on any day I shipped or learned something that materially moved Reach'. Don't soften the destination — just stop making daily progress invisible."
+      }
+    ]
+  }
+}

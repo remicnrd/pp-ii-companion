@@ -1,0 +1,100 @@
+{
+  "day": 15,
+  "videoId": "fR-9kw8XU7w",
+  "covers": [19, 20, 21],
+  "title": "Overcoming Fears of Failure, Success, and Rejection",
+  "duration_seconds": 2856,
+  "summary": "Three fears collapsed into one mechanism: each is just your nervous system running an unhelpful pain association on a label you've defined. Failure, success, and rejection are not events — they're meanings you assign based on rules you mostly didn't choose. Tony walks through redefining the rules, then introduces the Erasure Technique (a swish-style pattern interrupt) and anchoring to physically rewrite the response. The point isn't to never feel fear; it's to stop letting these three specific labels stop you from acting.",
+  "keypoints": [
+    {
+      "title": "Fear is a useful state aimed at the wrong target",
+      "body": "Fear is your nervous system mobilized to avoid pain — fully appropriate for genuine danger. The malfunction is when that same intensity gets attached to 'trying something and it not turning out perfectly'. F-E-A-R as false evidence appearing real is the cliché but the mechanism is real: your body runs the imagined event as if it happened, often many times. A coward dies a thousand deaths."
+    },
+    {
+      "title": "Failure and success are definitions, not events",
+      "body": "Nothing outside you assigns the label. The CEO making $2M who feels like a failure and the man who feels successful for being above ground have the same mechanism — different rules. Whose rules are you living by? Almost certainly not ones you sat down and consciously designed. Make it hard to feel like a failure and easy to feel successful, without lowering the destination."
+    },
+    {
+      "title": "Happily achieve, don't achieve to be happy",
+      "body": "The default trap: 'I'll let myself feel good once I hit X'. The reframe: feel good now, achieve from that state. The performance is better, the process is sustainable, and you stop holding your own emotional life hostage to outcomes that keep moving."
+    },
+    {
+      "title": "The past does not equal the future — and the brain needs proof",
+      "body": "Byron Scott was passing the ball every time it touched his hands because his nervous system had cached a stack of failures. Telling him to 'be confident' wouldn't move the wiring. The Erasure Technique — running the failure memory backwards at hyperspeed with absurd colors and sounds — scratches the record so it can't play the same way again. Then anchor a new state to a trigger ('boom') and rep it until it's automatic."
+    },
+    {
+      "title": "Fear of success is fear of pain wearing a tuxedo",
+      "body": "If success means people pull away, or pressure rises, or you'll have further to fall — your brain rationally avoids it. Surface those associations explicitly, run leverage on each one, and erase the linkages the same way you'd erase a failure memory. Otherwise success becomes the next thing you sabotage right before you reach it."
+    },
+    {
+      "title": "Rejection is the gift you decline to accept",
+      "body": "The Buddha story: a gift not accepted still belongs to the giver. Most rejection isn't rejection of you — it's rejection of an idea, a moment, an impression. You set the rules for what counts. If your rule is 'someone disagrees → I'm rejected', you've made it nearly impossible to act in the world. A better rule: rejection only counts if someone shows you you've violated your own values."
+    },
+    {
+      "title": "Massive rejection is correlated with massive success",
+      "body": "M*A*S*H was turned down by 32 producers. Stallone got rejected by a thousand-plus agents and was offered money to not star in his own script. If nobody is rejecting your work, you're probably not putting out anything that matters. Re-anchor rejection as evidence you're on the right track, not as evidence to retreat."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Redefine the Rules for Failure / Success / Rejection",
+      "description": "Run this once per label. Most of the fear evaporates the moment the rule changes — you don't need any technique beyond it for a meaningful chunk of cases.",
+      "steps": [
+        {"name": "Surface the current rule", "detail": "What specifically must happen for you to feel like a failure / a success / rejected? Be honest — these are the rules running by default, not the ones you'd write today."},
+        {"name": "Audit whose rules they are", "detail": "Almost never your conscious design. Family, culture, an old peer group, a past version of you. That alone reduces their authority."},
+        {"name": "Rewrite — hard to feel bad, easy to feel good", "detail": "Tony's: 'I succeed if I gave my all or learned something. I fail only if I quit.' For rejection: 'Only counts if I'm clearly violating my own values.' The standards stay high; the daily ability to feel like you're winning becomes possible."}
+      ]
+    },
+    {
+      "name": "The Erasure Technique",
+      "description": "A pattern interrupt for a specific failed/embarrassing/rejecting memory that keeps replaying and tanking your state. Use after you've gotten leverage and are in a strong physical state.",
+      "steps": [
+        {"name": "Get into a peak state", "detail": "Stand tall, breathe like you're unstoppable, big silly grin. The whole technique requires you be in a strong state when you run it — otherwise you just re-traumatize."},
+        {"name": "Anchor the peak state", "detail": "While at peak, do something unique — a gesture, a word like 'boom', a posture — repeatedly, so the trigger fires the state later."},
+        {"name": "Watch the memory once at distance", "detail": "Run the memory forward like a movie on a screen, from outside it, while staying in the strong state."},
+        {"name": "Run it backwards at hyperspeed with absurdity", "detail": "From the end to the beginning, fast, in your favorite colors, with circus music or weird sounds, mickey-mouse ears on the people, voices reversing. The point is to make the file unplayable in its original form."},
+        {"name": "Rep it 6+ times, varying each pass", "detail": "Forward fast, backward fast, change colors, add absurdities. Until the memory triggers a smile or neutrality, not the old slump. Then return to it cold to test."},
+        {"name": "Install the new state on the trigger", "detail": "Rehearse succeeding in the relevant context while firing the anchor. Repetition is what makes it stick."}
+      ]
+    },
+    {
+      "name": "Re-condition Rejection as Strength",
+      "description": "When you can't avoid rejection (sales, building, shipping, dating), make it fuel.",
+      "steps": [
+        {"name": "Build a strong-state anchor", "detail": "In a peak physical state, anchor unstoppability to a unique trigger. Rep it until reliable."},
+        {"name": "Imagine rejection + fire the anchor simultaneously", "detail": "Run the imagined rejection and immediately fire the strong-state trigger. Repeat many times. The brain stops linking rejection to collapse and starts linking it to power."},
+        {"name": "Use a model", "detail": "Pick someone unflappable in the face of rejection. Imagine running their physiology, voice, and face when it lands. Rehearse until it's automatic."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "This is a doing day, not a reading day. Pick one real fear from each of the three categories and run the redefinition. Then pick the single memory that's been costing you the most and run the Erasure Technique on it. If you skip the physical state work, none of this lands.",
+    "questions": [
+      {
+        "id": "current_rules",
+        "label": "Your current rules for failure, success, and rejection — stated honestly",
+        "guidance": "What actually has to happen for each feeling to fire? Look at recent times you felt each one and reverse-engineer the rule. 'They didn't reply within X hours.' 'Revenue this month wasn't Y.' 'The launch didn't get the response I expected.'"
+      },
+      {
+        "id": "new_rules",
+        "label": "Your rewritten rules — hard to feel bad, easy to feel good, standards intact",
+        "guidance": "Failure: only when you quit, only when you stop giving your all and stop learning. Success: any day you gave it real effort or pulled out a real lesson. Rejection: only counts when you've genuinely violated your own values, not when someone disagrees or doesn't reply."
+      },
+      {
+        "id": "memory_to_erase",
+        "label": "One specific memory still dragging on your performance — and what you'd have to do differently if it didn't",
+        "guidance": "Pick a real one. A failed launch, a public miss, a rejection that still grips. Identifying the cost of carrying it is part of getting leverage to actually run the Erasure Technique today."
+      },
+      {
+        "id": "rejection_anchor",
+        "label": "Your strong-state anchor — the trigger and how you'll build it",
+        "guidance": "A word ('boom'), a gesture, a posture. Build it in a real peak state, not while reading. Then rehearse rejection-plus-anchor a dozen times until your default response shifts. This is especially load-bearing if your work involves volume rejection — sales, fundraising, shipping anything to an audience."
+      },
+      {
+        "id": "evidence_of_success",
+        "label": "Two failures and two rejections from your past — and the specific benefit each one gave you",
+        "guidance": "Forced-perspective work. The lost deal that taught you the qualifying question. The rejection that pushed you to build the better version. Then run Erasure on the residual emotion so what remains is the lesson, not the sting."
+      }
+    ]
+  }
+}

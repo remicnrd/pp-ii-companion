@@ -1,0 +1,65 @@
+{
+  "day": 9,
+  "videoId": "u9ZFsQep21w",
+  "covers": [11],
+  "title": "The Power of Why",
+  "duration_seconds": 1544,
+  "summary": "A short, foundational session before tomorrow's goal-setting workshop. Goals are how you create the future deliberately — but most people treat them as wishes, not as commitments. The variable that separates wishes from commitments is the why behind each one, on both sides: what you'll gain by hitting it, and what it'll cost you not to. Reasons come first; how comes second.",
+  "keypoints": [
+    {
+      "title": "You already have goals — they're just lousy",
+      "body": "If your daily goal is 'get through the day' or 'pay the bills', you're not goalless — you're goal-poor. Whatever target your brain points at, it moves toward. The fix isn't motivation; it's pointing at something worth pointing at."
+    },
+    {
+      "title": "Yale 1953/1973 — the 3% with written goals outearned the other 97% combined",
+      "body": "Tony cites the (apocryphal but illustrative) study to make the point: writing goals down with timelines and specifics changes outcomes by orders of magnitude. The act of converting a vague want into a written commitment activates a different part of your brain."
+    },
+    {
+      "title": "Purpose is stronger than outcome",
+      "body": "Goals aren't really about the things you'll have at the end — they're about who you become in the process. A million dollars motivates you a little; becoming the kind of person who can manifest a million dollars and the freedom that buys motivates you a lot. Set goals for the version of you they'll require."
+    },
+    {
+      "title": "Reasons come first, answers come second",
+      "body": "If you have big enough reasons to do something, you'll find the how. If you have a clever how but weak reasons, you'll abandon it. So the leverage point in any goal is the why, not the strategy. Tony spent two and a half days setting goals on the trans-Siberian railway and another two-three on plans — the order matters."
+    },
+    {
+      "title": "Use both carrots and sticks",
+      "body": "For each major goal, write the positive reasons (what you'll gain) AND the negative reasons (what it'll cost you not to hit it). Most people only write the positive side. The brain works harder to avoid pain than to gain pleasure — leaving out the cost-of-not is leaving leverage on the table."
+    },
+    {
+      "title": "Use commitment as deliberate pressure",
+      "body": "Pressure makes diamonds. Tell people you're going to do it. Put money on it. Make it harder to back out than to follow through. 'I'll do this when I feel like it' is wishful; public commitment with stakes is structural."
+    },
+    {
+      "title": "Dissatisfaction is fuel, not failure",
+      "body": "The gap between where you are and where you want to be is the engine. Don't try to feel okay about everything — let some of the dissatisfaction stand, deliberately, because it's what generates motion. Comfort is what kills the search."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "The Why-Stack (per goal)",
+      "description": "Before setting any goal, run this stack. If a goal can't survive it, the goal is wrong or the reasons are too thin.",
+      "steps": [
+        {"name": "Why I will achieve this — gain side", "detail": "List the concrete and emotional things you'll gain. Not 'be successful' — name the specific feelings, freedoms, relationships, capabilities."},
+        {"name": "Why I will achieve this — cost-of-not side", "detail": "What does it cost you in 1, 3, 5, 10 years if you don't? Same depth as the gain side."},
+        {"name": "Who I become by pursuing this", "detail": "The version of you that has to exist to make this real. That person is the actual goal."},
+        {"name": "What pressure am I willing to create", "detail": "Public commitment, financial stake, deadline, accountability partner. What's the structural mechanism that makes backing out harder than continuing?"}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Two things today, both prep work for tomorrow's goal-setting workshop. The point is to enter that workshop already in a state of dissatisfaction-plus-possibility — not blank, not complacent.",
+    "questions": [
+      {
+        "id": "dissatisfied",
+        "label": "Areas of your life you're genuinely dissatisfied with right now",
+        "guidance": "Go through physical, emotional, social, intellectual, financial, relationships, your work / Reach engine. Don't soften it. Dissatisfaction is fuel — name it accurately."
+      },
+      {
+        "id": "beliefs_for_goals",
+        "label": "Two or three beliefs you'd need to operate from to actually set and hit big goals",
+        "guidance": "Not affirmations. Operating beliefs. E.g. 'There's always a way if I'm committed.' 'My future doesn't have to look anything like my past.' 'Reasons matter more than methods.' Pick ones you can defend to yourself."
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "day": 3,
+  "videoId": "w1L61-YyfSM",
+  "covers": [3],
+  "title": "Taking Control — The First Step",
+  "duration_seconds": 2492,
+  "summary": "What governs your life isn't what happens — it's the meaning you assign to what happens. Tony introduces neuro-associations: the bodily, gut-level links between an event and a feeling, formed in moments of high emotion and replayed automatically forever after. Positive thinking is a thought; a neuro-association is a reflex. Reflexes win.",
+  "keypoints": [
+    {
+      "title": "Behavior is downstream of meaning",
+      "body": "The same event — a breakup, a setback, a piece of feedback — can mean 'I'm broken' or 'I'm being redirected'. The meaning is what determines what you do next. Change the meaning, the behavior follows. Don't change the meaning, no amount of advice or willpower sticks."
+    },
+    {
+      "title": "Cause → effect → direction → destiny",
+      "body": "Every thought and action is a cause set in motion. Each effect stacks on the prior one to form a direction. Direction maintained long enough becomes destiny. This is why daily inputs matter so much — they aren't dramatic, but they compound."
+    },
+    {
+      "title": "Positive thinking isn't enough — conditioning is",
+      "body": "Positive thinking requires you to think about it. By the time you remember, you've already reacted from your conditioned response. The work isn't to override the reaction in the moment; it's to recondition the reflex itself so the default response changes."
+    },
+    {
+      "title": "Anchors form whenever emotion is high",
+      "body": "When you're in a strong state — joy, anger, fear, love — whatever happens around you gets linked to that state. A song with an ex. A red light in the rear-view. A face you came home angry to three nights running. After enough repetitions the trigger alone reproduces the feeling. This is the basic mechanism of the rest of the program."
+    },
+    {
+      "title": "Most limiting associations have nothing to do with reality",
+      "body": "Tony's microphone-and-knight story: the audience instantly decided the suit of armor was the cause; the real cause was a passing police car. We do this constantly — link 'asking for the raise = humiliation' or 'building the business = burnout' from a single coincidence and then run our lives by it. Awareness alone often dissolves the link."
+    },
+    {
+      "title": "Successful people are studyable through their associations",
+      "body": "Spielberg got pleasure from changing people's emotional states (scaring his sisters). Springsteen linked rock to escape. Mother Teresa linked giving to ultimate meaning. Trace anyone's destiny back and you'll find the associations that drove the daily action. Yours work the same way."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Cause / Effect / Direction / Destiny",
+      "description": "Tony's lens for taking small actions seriously. Use it to evaluate any habit or association.",
+      "steps": [
+        {"name": "Cause", "detail": "Every thought and action you take is a cause."},
+        {"name": "Effect", "detail": "Each cause produces a result, however small."},
+        {"name": "Direction", "detail": "Effects stack into a direction over time — toward something, away from something."},
+        {"name": "Destiny", "detail": "Direction held long enough becomes the life you end up with. Design backwards from there."}
+      ]
+    },
+    {
+      "name": "Anchoring (how associations form)",
+      "description": "The mechanism behind every conditioned response — useful and limiting alike. Knowing how anchors form is what lets you build new ones on purpose later in the program.",
+      "steps": [
+        {"name": "Reach a strong emotional state", "detail": "Anchors only form in heightened emotion. Mild states don't take."},
+        {"name": "Pair the state with a specific stimulus", "detail": "A sound, image, word, gesture, smell, or context."},
+        {"name": "Repeat", "detail": "Repetition deepens the link. Strong emotion + repetition shortens the time to lock-in."},
+        {"name": "The stimulus alone now triggers the state", "detail": "Now the trigger alone produces the response. This is what makes a phobia, a craving, a love song, or a peak-performance ritual."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Become aware of the associations that have actually been driving your life — three that have helped, three that have held you back. Awareness alone often starts the change. Tomorrow's session will give you the explicit tool to rewrite the limiting ones.",
+    "questions": [
+      {
+        "id": "empowering",
+        "label": "Three associations that have shaped your destiny for the better",
+        "guidance": "What did you link to pleasure or pain that quietly made you who you are? E.g. 'shipping fast = pride', 'breaking my word = self-disgust'."
+      },
+      {
+        "id": "limiting",
+        "label": "Three associations that are limiting you right now",
+        "guidance": "Where do you flinch? What does 'asking for X' or 'going public with Y' or 'charging real money' actually mean to you in your gut? Name it."
+      },
+      {
+        "id": "lever",
+        "label": "Of those limiting ones — which one, if rewritten, would change your highest-lever work the most?",
+        "guidance": "Skip the small ones. Pick the one that's actually in the way of shipping/scaling. That's the one we work on first."
+      }
+    ]
+  }
+}

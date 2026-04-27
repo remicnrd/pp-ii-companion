@@ -1,0 +1,81 @@
+{
+  "day": 5,
+  "videoId": "P8g2PcWR1V8",
+  "covers": [5, 6, 7],
+  "title": "What Everyone Wants and How You Can Get It — State Management via Physiology",
+  "duration_seconds": 2519,
+  "summary": "Everything you say you want — money, business, a relationship — you actually want for the feeling state you think it'll produce. The deepest skill in this whole program isn't motivation; it's state management — the ability to change how you feel deliberately. Today's lever is physiology: posture, breathing, face, voice, movement. State drives behavior; behavior drives results.",
+  "keypoints": [
+    {
+      "title": "Everything you want is a state",
+      "body": "Push the 'why' past three layers and every goal — wealth, business, a partner — bottoms out in a feeling: freedom, peace, pride, contribution, love. The thing isn't the thing. So the most leveraged skill you can build is moving directly to the state without waiting for the external thing to deliver it."
+    },
+    {
+      "title": "Capability is constant — state is what varies",
+      "body": "You've had moments where you were brilliant and moments where you blanked on your own phone number. Same brain. The difference is the state you were in. Belushi vs W. Mitchell makes the point on either extreme: state-management dictates outcome more than circumstance does."
+    },
+    {
+      "title": "Emotion is created by motion",
+      "body": "Try standing tall, looking up, breathing fully, grinning, and getting depressed — your nervous system won't cooperate. Posture, breathing, face, voice, gesture are inputs to feeling, not outputs. If you don't like your state, change the body before you try to change the thought."
+    },
+    {
+      "title": "Most coping habits are self-administered physiology hacks",
+      "body": "Cigarettes work because they force a breathing pattern. Eating works because it slows you down and changes blood chemistry. Drugs and alcohol shortcut the same pathway. Knowing this lets you replace the destructive routes with deliberate physiology — same effect, no toll."
+    },
+    {
+      "title": "Calibrate state on a 0-10 scale per situation",
+      "body": "Different tasks need different intensities. Ten for negotiating, lower for telling someone you love them. The discipline is asking 'what level do I need to be at right now?' and getting yourself there on purpose, instead of letting the day's mood govern your output."
+    },
+    {
+      "title": "Build personal 'power moves' — repeatable triggers into peak state",
+      "body": "A specific gesture, posture, breath, voice volume, or phrase that reliably puts you in your best state. Find the one that works for you (not a generic one) by studying yourself when you're already on a roll, then practice it until it's automatic."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "The Five Levers of Physiology",
+      "description": "The concrete inputs you can manipulate to shift state in seconds. Use them in order when you're stuck.",
+      "steps": [
+        {"name": "Movement", "detail": "Gestures, pace, posture. Acceleration of movement is the fastest way to spike intensity."},
+        {"name": "Breathing", "detail": "Faster, deeper, slower — match the breath to the state you want. Most calm/intensity shifts are breathing shifts in disguise."},
+        {"name": "Facial expression", "detail": "80+ muscles. A held smile alone moves manic-depressive subjects out of depression in studies. Stop the habitual grimace."},
+        {"name": "Voice", "detail": "Volume, tempo, tone. You can't talk in a bored voice and feel passionate."},
+        {"name": "Diet / sleep / energy hygiene", "detail": "The slow lever. Blood sugar swings, sleep debt, and crap food all degrade the baseline you're starting state changes from."}
+      ]
+    },
+    {
+      "name": "State Calibration (0-10)",
+      "description": "A check-in protocol — useful before any high-stakes interaction.",
+      "steps": [
+        {"name": "Ask: where am I right now, 0-10?", "detail": "Be honest. Stale, distracted, hyped, anxious, neutral."},
+        {"name": "Ask: where do I need to be for this task?", "detail": "Pitching a client and putting your kid to bed need very different states."},
+        {"name": "Close the gap with the five levers", "detail": "Don't wait for inspiration. Use posture, breath, face, voice, movement to get there in 30 seconds."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Today is purely physical. Find your dispassionate state and your most-passionate state, in your body, deliberately. Then catalog the specific differences so you can summon either on demand. This is the foundation for every later session — Coach can't do anything for you if you can't get yourself to a useful state to begin with.",
+    "questions": [
+      {
+        "id": "dispassionate",
+        "label": "Speak (out loud, alone is fine) about something you care about — but in a totally dispassionate way for 2-3 minutes",
+        "guidance": "Slumped, slow, low volume, neutral face, no gestures. Notice exactly how that feels in your body."
+      },
+      {
+        "id": "passionate",
+        "label": "Now do the opposite — same topic, but in the most passionate, energized state you can produce, for 2-3 minutes",
+        "guidance": "Big gestures, fast tempo, full breath, animated face, volume up. Push past awkward."
+      },
+      {
+        "id": "diff",
+        "label": "Catalog the specific differences in posture, breath, face, gesture, voice between the two states",
+        "guidance": "Be precise — 'when I'm passionate I lean forward, gesture above shoulder height, breathe through my mouth, speak at ~1.3x speed'. These are your own buttons."
+      },
+      {
+        "id": "trigger",
+        "label": "Pick one signature 'power move' from that list — a gesture or posture you'll use to flip into peak state on command",
+        "guidance": "Pick something physical and reliable. Practice it 10x today. Use it before your next important task."
+      }
+    ]
+  }
+}

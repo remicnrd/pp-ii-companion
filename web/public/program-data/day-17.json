@@ -1,0 +1,67 @@
+{
+  "day": 17,
+  "videoId": "j8f424Rb7qI",
+  "covers": [23],
+  "title": "How to Increase Your Energy",
+  "duration_seconds": 798,
+  "summary": "A short, biology-first session: the quality of your life is downstream of the quality of your cells, and your cells are run on oxygen and water. Tony argues that the cheapest, fastest leverage on energy isn't motivation — it's getting waste out of the bloodstream by breathing better and eating water-rich foods. Treat this as the physical substrate that everything else in the program runs on.",
+  "keypoints": [
+    {
+      "title": "Energy is a cellular question, not a willpower question",
+      "body": "At Life Mastery, blood tests show people's red blood cells clumped together — moving slowly, carrying less oxygen. Nine days of disciplined breathing and water-rich eating later, the cells separate and energy returns. The point: low energy is usually a transport problem in your body, not a character problem. Fix the transport and the rest is easier."
+    },
+    {
+      "title": "Your bloodstream is a sewer system, not just a delivery system",
+      "body": "Cells die and regenerate constantly — billions a day — and the waste has to be carried off in solution. If there isn't enough water in the system, waste accumulates, oxygen falls, and you slowly poison yourself. This is why fatigue, sluggishness, and disease cluster together: they're symptoms of the same underlying clog."
+    },
+    {
+      "title": "Drink less, eat your water",
+      "body": "Tony pushes back on the 'chug ten glasses a day' advice — most tap water carries chlorine, fluoride, and other junk, and you can't cleanse a system by drowning it. Better leverage: get water from fruits, vegetables, and sprouts, where it comes bound with nutrients and enzymes. Drink to thirst, eat your hydration."
+    },
+    {
+      "title": "The 70% rule",
+      "body": "The target is 70% of what you eat being water-rich foods. In Tony's seminars, most people are at 15-20%, which he calls 'suicide on a slow timer'. The implementation is unglamorous: a salad with every meal, fruit as the default snack. Done daily, this changes how you feel inside two weeks."
+    },
+    {
+      "title": "Mind and biochemistry are one loop",
+      "body": "The states you put yourself in change your biochemistry, and your biochemistry changes the states available to you. Chronic stress and chronic poor fueling reinforce each other; so do calm breathing and clean fueling. Energy work is therefore also state work — you can't separate them."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "The 10-Day Energy Protocol",
+      "description": "A minimum-viable physical reset to run alongside the rest of the program. Two inputs, daily, for ten days — long enough to feel the shift, short enough to commit to.",
+      "steps": [
+        {"name": "Diaphragmatic breathing, 3x daily", "detail": "Ten breaths in the ratio inhale 1, hold 4, exhale 2. The hold oxygenates the blood; the long exhale moves lymph and waste. Three short sessions a day, not one long one."},
+        {"name": "70% water-rich foods", "detail": "Fruits, vegetables, sprouts, and their fresh juices make up the majority of every meal. Salad with every meal, fruit as the default snack. Cooked, processed, and dehydrated foods become the minority."},
+        {"name": "Drink to thirst, not by quota", "detail": "Stop forcing tap water by the gallon. Use thirst as the signal. The water you actually need is mostly already in the food if you're eating right."},
+        {"name": "Measure by feel at day 10", "detail": "Don't track it daily — just commit to ten days and notice the delta. Energy on waking, energy in the afternoon trough, recovery after a hard work block. The evidence is in your own body."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Audit what you actually put in your body, then commit to the 10-day protocol. The point isn't perfection — it's giving the engine you depend on for everything else (including shipping work) the inputs it needs to run.",
+    "questions": [
+      {
+        "id": "intake_audit",
+        "label": "Everything that has passed your lips in the last 24 hours — foods and drinks, with rough amounts",
+        "guidance": "Be exact. Coffee, the handful of nuts, the bite of someone else's food. You can't see the pattern if the list is sanitized."
+      },
+      {
+        "id": "water_percent",
+        "label": "Circle the water-rich items (fresh fruit, vegetables, sprouts, fresh juice). What percentage of your intake is that?",
+        "guidance": "Milk doesn't count. Beer doesn't count. Coffee doesn't count. Cooked-to-death vegetables barely count. Be honest — 15-20% is normal, and that's the problem."
+      },
+      {
+        "id": "ten_day_commit",
+        "label": "Your 10-day plan — how you'll hit 70% water-rich and 3x breathing without making it a project",
+        "guidance": "Concrete: salad with lunch and dinner, fruit on your desk, 10 breaths before each work block. If you're shipping hard on Reach this week, anchor the breathing to existing transitions (start of day, before deep work, end of day) so it doesn't need willpower."
+      },
+      {
+        "id": "energy_baseline",
+        "label": "Your current energy baseline — morning, midday, evening, on a 1-10 scale — so you can compare in 10 days",
+        "guidance": "One sentence on each. The point is to have a real before/after, not a vibe."
+      }
+    ]
+  }
+}

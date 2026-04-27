@@ -1,0 +1,76 @@
+{
+  "day": 6,
+  "videoId": "KnVLarj_doM",
+  "covers": [8],
+  "title": "The Power of Focus",
+  "duration_seconds": 1798,
+  "summary": "Yesterday's lever was the body. Today's is attention. Your felt experience of life is a tiny window cropped from everything that's happening — and the crop is yours to choose. The fastest way to change state without moving a muscle is to change what you're focused on, and the most reliable way to direct focus is through the questions you ask yourself.",
+  "keypoints": [
+    {
+      "title": "Your experience is the slice you focused on, not what happened",
+      "body": "The party metaphor: in any room there's a fight, a flirtation, someone bored, someone delighted. Your camera lands on one of these and that's the party you took home. Same logic applies to your day, your business, your marriage. Reality is broad; experience is narrow."
+    },
+    {
+      "title": "Humans are deletion creatures",
+      "body": "Conscious bandwidth is small, so the brain is always deleting most of what's available. The question isn't whether you delete, it's what you delete. Most people delete the abundance and keep the friction — by habit, not by choice."
+    },
+    {
+      "title": "Failure is finding pain when there's no shortage of evidence for the opposite",
+      "body": "Tony's working definition: success = consistently generating pleasure and growth. Failure = the ability to find pain regardless of how good things actually are (Elizabeth Taylor, Belushi exhibit A). The asymmetry is in what you focus on, not in what you have."
+    },
+    {
+      "title": "Questions are the steering wheel of focus",
+      "body": "Thinking is asking and answering questions, mostly unconsciously. 'Why does this always happen to me?' produces an answer. So does 'what can I make of this?'. Whatever you ask, the brain dutifully delivers — including evidence for false premises. Change the questions and the focus follows."
+    },
+    {
+      "title": "Questions also change what you delete",
+      "body": "A good question forces the camera to sweep parts of the room you'd been ignoring. 'What am I most excited about right now?' makes you find something even on a bad day, because the brain pattern-matches against the question."
+    },
+    {
+      "title": "Questions get you access to your own resources",
+      "body": "'Can I really do this?' summons doubt. 'How can I make this happen and have fun doing it?' summons possibility and creativity. Same brain, same skill set — different question, different output. The greatest communicators (MLK, JFK) led with questions for this reason."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Morning Power Questions",
+      "description": "A daily ritual for engineering state. Five questions, two answers each, every morning — felt, not skimmed. Conditions the nervous system to start the day from gratitude / pride / excitement instead of from urgency or anxiety.",
+      "steps": [
+        {"name": "What am I most happy about in my life right now?", "detail": "If 'nothing' — then 'what could I be happy about if I wanted to be?' Answer twice. Feel each."},
+        {"name": "What am I most excited about right now?", "detail": "Same — at least two answers, and stay long enough to feel why."},
+        {"name": "What am I most grateful for right now?", "detail": "Tony's wealth formula: live every day in an attitude of gratitude. The more you feel you have, the more you have."},
+        {"name": "What am I most proud of right now?", "detail": "Pride well-placed builds identity. Stack reasons over time."},
+        {"name": "Who do I love and who loves me?", "detail": "Step into specific people, specific moments. Don't list — feel."}
+      ]
+    },
+    {
+      "name": "Empowering vs disempowering question",
+      "description": "A real-time substitution rule for any reactive moment.",
+      "steps": [
+        {"name": "Catch the bad question", "detail": "'Why does this always happen to me?' / 'What's wrong with me?' / 'Why can't I get this right?'"},
+        {"name": "Substitute the better question", "detail": "'What can I learn from this?' / 'What's actually great about this situation?' / 'How can I solve this and enjoy doing it?'"},
+        {"name": "Answer it — in writing if it's a stuck moment", "detail": "Until you put a real answer down, the substitution doesn't take. Don't just pose; answer."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Design and commit to your five Morning Power Questions for the rest of the program (~22 days). Two answers per question, every morning, felt — not rushed. The point is to anchor specific empowering states to the moment of waking up.",
+    "questions": [
+      {
+        "id": "questions",
+        "label": "Your five custom morning questions",
+        "guidance": "Start with Tony's five (happy / excited / grateful / proud / love), or adapt. The criterion is each one reliably produces a strong empowering state when you actually answer it."
+      },
+      {
+        "id": "commitment",
+        "label": "When and where will you do this every morning?",
+        "guidance": "Tie it to an existing trigger — first coffee, brushing teeth, before phone. Specific or it won't happen."
+      },
+      {
+        "id": "default_substitution",
+        "label": "One disempowering question you catch yourself asking — and the substitute you'll use",
+        "guidance": "Pick a real one. ('Why am I behind?' → 'What's the next concrete move that will move the needle today?')"
+      }
+    ]
+  }
+}

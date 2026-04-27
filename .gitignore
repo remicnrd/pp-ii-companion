@@ -1,0 +1,18 @@
+node_modules
+.next
+out
+.DS_Store
+.vercel
+*.log
+.env*
+*.tsbuildinfo
+next-env.d.ts
+
+# Source audio/data/transcripts at the root are kept locally for re-processing.
+# The deployable copies live in web/public/. We commit only those.
+/audio/
+/data/
+/transcripts/
+logs_audio.txt
+logs_subs.txt
+playlist_index.txt

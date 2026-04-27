@@ -1,0 +1,99 @@
+{
+  "day": 16,
+  "videoId": "-26Wos0jVdw",
+  "covers": [22],
+  "title": "Creating Unstoppable Self-Confidence",
+  "duration_seconds": 1603,
+  "summary": "Confidence isn't a trait you have or lack — it's a state you produce on demand. Tony's argument: you create it through three levers (physiology, focus, beliefs) and reinforce it through a self-feeding loop where small reps of believed success expand what you'll attempt. The trap is waiting to feel confident before acting; the move is producing the state first, then letting performance catch up. The Success Cycle — beliefs drive potential tapped, which drives action, which drives results, which drives beliefs — is the engine.",
+  "keypoints": [
+    {
+      "title": "Confidence is a state you produce, not a trait you wait for",
+      "body": "No one is confident all the time. The skill is being able to turn it on when you need it. Treat confidence as a setting on your nervous system — accessible through the body, focus, and beliefs — rather than as a personal attribute that's either there or missing."
+    },
+    {
+      "title": "Physiology first — emotion is created by motion",
+      "body": "Stand, breathe, move, gesture, speak the way you would if you were already unstoppable. Tony does this with people about to firewalk or break boards: explosive change in posture, breath, and voice produces the state in seconds. If you try to talk yourself into confidence from a slumped, shallow-breathing body, you'll lose. Change the physiology first; the thoughts follow."
+    },
+    {
+      "title": "Confidence often precedes competence — and that's fine",
+      "body": "If you're confident enough to start, you can build the competence on the way. If you're competent without confidence, you won't ship. 'Acting as if' isn't fakery; it's giving your brain enough state to access what you already know but can't otherwise reach."
+    },
+    {
+      "title": "Hope vs. expect — focus determines feeling",
+      "body": "Hoping for an outcome runs two pictures in your head — the win and the loss — usually dim, often passive. Expecting runs one picture, in color, and triggers an active body. Same goal, completely different state. The questions you ask drive this: 'Can I really pull this off?' splits focus; 'What's the best way to do this?' presupposes you will and tells your brain to start solving."
+    },
+    {
+      "title": "Useful beliefs you can install today",
+      "body": "Three Tony uses on himself: if I can imagine it, I can achieve it; if I'm committed, there's a way (and if I don't know it, someone does); even if it doesn't work out, I'll learn something useful. None requires having done the thing before. They're permission slips that let you act before the evidence has accumulated."
+    },
+    {
+      "title": "The Success Cycle — why momentum compounds",
+      "body": "Four nodes: beliefs → potential tapped → action taken → results → back to beliefs. Limiting beliefs throttle potential, which produces weak action and weak results, which reinforce the limiting belief. The downward spiral is why people stuck in it stay stuck. Reverse it by changing results in advance — mentally rehearsing the outcome until your nervous system treats it as already true. The arm-rotation exercise demonstrates this: a third more range with no actual practice, just vivid mental rehearsal."
+    },
+    {
+      "title": "Lousy questions, lousy confidence",
+      "body": "People who self-analyze constantly — 'why did I do that, why don't I ever, what's wrong with me' — manufacture doubt on demand. Two specific moves: shift focus from picking yourself apart to contributing to others (instantly raises felt confidence), and curate the memories you replay. Pull up five times you turned around something that looked dark. You have those references; you're just not retrieving them."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "The Three Levers of Confidence-On-Demand",
+      "description": "Ordered by speed-to-effect. Use the fastest one that gets you into state, then layer the others.",
+      "steps": [
+        {"name": "Physiology", "detail": "Stand tall, breathe deep, move with intention, speak with tempo, gesture with snap. Try the cape walk if you need to break the seriousness barrier. State changes in seconds."},
+        {"name": "Focus", "detail": "Switch from hoping to expecting — one outcome, in color, fully felt. Replace doubt-spawning questions ('can I?') with solution-presupposing ones ('what's the best way?'). Shift attention off self-analysis and onto contribution."},
+        {"name": "Beliefs", "detail": "Install permission-slip beliefs that don't require prior evidence: 'if I can imagine it, I can achieve it'; 'if I'm committed, there's a way'; 'I'll learn something either way'. Repeat in a strong state until they're felt, not just stated."}
+      ]
+    },
+    {
+      "name": "The Success Cycle",
+      "description": "The compounding loop behind why some people accelerate and others spiral. Every node is editable, but beliefs are the leverage point.",
+      "steps": [
+        {"name": "Beliefs", "detail": "Your felt certainty about what's possible. The throttle on the whole system. Limiting beliefs cap everything downstream."},
+        {"name": "Potential tapped", "detail": "How much of your real capacity you actually access in the moment. Belief governs how much you'll reach for."},
+        {"name": "Action", "detail": "What you actually do — volume, quality, willingness to be in the unfamiliar. Tapping more potential makes bolder action available."},
+        {"name": "Results", "detail": "What comes back. Better state and bolder action produce better results, which feed back into belief — for or against you."},
+        {"name": "Loop maintenance — change results in advance", "detail": "If you're spiraling and have no real-world wins to feed the belief node, manufacture them mentally. Rehearse the result vividly enough that your nervous system treats it as already real, then act from that state. The arm-rotation demo shows this works on the body — it works on harder targets the same way."}
+      ]
+    },
+    {
+      "name": "Hope vs. Expect — the Focus Test",
+      "description": "A 30-second diagnostic for any goal. If you're hoping, your state is leaking before you even act.",
+      "steps": [
+        {"name": "Hope test", "detail": "Picture the outcome while hoping it happens. Notice: dim, two pictures, passive body, hedged self-talk."},
+        {"name": "Expect test", "detail": "Picture the same outcome while expecting it absolutely. Notice: single picture, color, active body, declarative self-talk."},
+        {"name": "Lock the expectation", "detail": "If you can't expect, the question to ask isn't 'will it work' but 'what would I have to believe to expect this'. Then install that belief via the levers above."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "The confidence work has to happen in your body, not on the page. Do the physical pieces first — actually stand up, actually run the arm exercise — and only then journal. The point is to leave today with both a working trigger and a curated set of memories you can pull up the next time the spiral starts.",
+    "questions": [
+      {
+        "id": "physiology_baseline",
+        "label": "Your unstoppable-state physiology — described specifically enough that you can reproduce it on demand",
+        "guidance": "Posture, breath rate and depth, gesture style, voice tempo and volume, facial expression. Try it now. The description is only useful if you can replay it before a hard call, a hard meeting, or a hard piece of work."
+      },
+      {
+        "id": "hope_to_expect",
+        "label": "One outcome you're currently hoping for — and what would have to be true for you to expect it instead",
+        "guidance": "If you're shipping something high-stakes — your highest-lever work counts here — notice whether you're running hope-pictures or expect-pictures. The work is identifying the belief gap that keeps you in hope, then deciding whether to install the belief or change the goal."
+      },
+      {
+        "id": "permission_beliefs",
+        "label": "Three permission-slip beliefs you'll install — and how you'll rep them",
+        "guidance": "Tony's set is a fine starting point. Better: write versions in your own voice, said in a strong physical state, repeated until felt. Frequency matters more than length — 30 seconds three times a day beats once a week."
+      },
+      {
+        "id": "success_cycle_audit",
+        "label": "Where in your Success Cycle is the leak right now?",
+        "guidance": "Are you not believing it'll work, not tapping potential, not acting, or not noticing the results you do produce? Different leaks need different fixes. If it's the belief node, mental rehearsal of results-in-advance is the move."
+      },
+      {
+        "id": "five_memories",
+        "label": "Five times you turned around something that looked dark",
+        "guidance": "A paragraph each. Situations where you didn't know how you'd pull it off and did. These are evidence files. Pull them up deliberately the next time confidence dips — don't make your brain manufacture references from scratch in the moment."
+      }
+    ]
+  }
+}

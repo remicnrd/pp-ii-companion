@@ -1,0 +1,275 @@
+{
+  "count": 20,
+  "days": [
+    {
+      "day": 1,
+      "videoId": "apo9lDKGMdI",
+      "covers": [
+        1
+      ],
+      "title": "The Key to Personal Power",
+      "duration_seconds": 3046,
+      "summary": "The opening session lays out the program's premise: the gap between people who get the life they want and people who don't is rarely capability — it's whether they decide what they want, take action on it, notice what's working, and adjust. Tony introduces the Ultimate Success Formula, which becomes the spine of the next 29 days.",
+      "audio_file": "audio/Day-01-Tony_Robbins_Personal_Power_II_Day_1_The_Key_to_Personal_Power.mp3",
+      "transcript_file": "transcripts/Day-01-Tony_Robbins_Personal_Power_II_Day_1_The_Key_to_Personal_Power.txt",
+      "data_file": "data/day-01.json"
+    },
+    {
+      "day": 2,
+      "videoId": "EWAb3hRf5UU",
+      "covers": [
+        2
+      ],
+      "title": "The Controlling Force That Directs Your Life",
+      "duration_seconds": 2464,
+      "summary": "If personal power is the ability to act, the question is why we so often don't. Tony's answer: every choice is governed by what we associate pain and pleasure to in that moment — not in theory, but in the body. Until you change those associations, no amount of willpower or positive thinking sticks.",
+      "audio_file": "audio/Day-02-Tony_Robbins_Personal_Power_II_Day_2_The_Controlling_Force_That_Directs_Your_Life.mp3",
+      "transcript_file": "transcripts/Day-02-Tony_Robbins_Personal_Power_II_Day_2_The_Controlling_Force_That_Directs_Your_Life.txt",
+      "data_file": "data/day-02.json"
+    },
+    {
+      "day": 3,
+      "videoId": "w1L61-YyfSM",
+      "covers": [
+        3
+      ],
+      "title": "Taking Control — The First Step",
+      "duration_seconds": 2492,
+      "summary": "What governs your life isn't what happens — it's the meaning you assign to what happens. Tony introduces neuro-associations: the bodily, gut-level links between an event and a feeling, formed in moments of high emotion and replayed automatically forever after. Positive thinking is a thought; a neuro-association is a reflex. Reflexes win.",
+      "audio_file": "audio/Day-03-Tony_Robbins_Personal_Power_Day_3_Taking_Control_The_First_Step_480p.mp3",
+      "transcript_file": "transcripts/Day-03-Tony_Robbins_Personal_Power_Day_3_Taking_Control_The_First_Step_480p.txt",
+      "data_file": "data/day-03.json"
+    },
+    {
+      "day": 4,
+      "videoId": "ithR1-mkrp8",
+      "covers": [
+        4
+      ],
+      "title": "The Science of Success Conditioning — NAC",
+      "duration_seconds": 2505,
+      "summary": "Tony's central technology: Neuro-Associative Conditioning. Every form of therapy that works does the same three things — gets leverage, interrupts the old pattern, conditions a new one. Once you can run that loop on yourself you stop needing therapists, gurus, or hype. The conditioning frame matters: change isn't a one-shot reprogram, it's a piano that needs retuning. You hold a new state by practicing it daily, not by deciding it once.",
+      "audio_file": "audio/Day-04-Tony_Robbins_Personal_Power_Day_4_The_Science_of_Success_Conditioning_NAC.mp3",
+      "transcript_file": "transcripts/Day-04-Tony_Robbins_Personal_Power_Day_4_The_Science_of_Success_Conditioning_NAC.txt",
+      "data_file": "data/day-04.json"
+    },
+    {
+      "day": 5,
+      "videoId": "P8g2PcWR1V8",
+      "covers": [
+        5,
+        6,
+        7
+      ],
+      "title": "What Everyone Wants and How You Can Get It — State Management via Physiology",
+      "duration_seconds": 2519,
+      "summary": "Everything you say you want — money, business, a relationship — you actually want for the feeling state you think it'll produce. The deepest skill in this whole program isn't motivation; it's state management — the ability to change how you feel deliberately. Today's lever is physiology: posture, breathing, face, voice, movement. State drives behavior; behavior drives results.",
+      "audio_file": "audio/Day-05-Tony_Robbins_Personal_Power_II_Day_5_to_7_What_Everyone_Wants_and_How_You_Can_Get_It.mp3",
+      "transcript_file": "transcripts/Day-05-Tony_Robbins_Personal_Power_II_Day_5_to_7_What_Everyone_Wants_and_How_You_Can_Get_It.txt",
+      "data_file": "data/day-05.json"
+    },
+    {
+      "day": 6,
+      "videoId": "KnVLarj_doM",
+      "covers": [
+        8
+      ],
+      "title": "The Power of Focus",
+      "duration_seconds": 1798,
+      "summary": "Yesterday's lever was the body. Today's is attention. Your felt experience of life is a tiny window cropped from everything that's happening — and the crop is yours to choose. The fastest way to change state without moving a muscle is to change what you're focused on, and the most reliable way to direct focus is through the questions you ask yourself.",
+      "audio_file": "audio/Day-06-Tony_Robbins_Personal_Power_Day_8_The_Power_of_Focus.mp3",
+      "transcript_file": "transcripts/Day-06-Tony_Robbins_Personal_Power_Day_8_The_Power_of_Focus.txt",
+      "data_file": "data/day-06.json"
+    },
+    {
+      "day": 7,
+      "videoId": "IWrwb2mfnJY",
+      "covers": [
+        9
+      ],
+      "title": "Values and Beliefs — The Source of Success or Failure",
+      "duration_seconds": 2582,
+      "summary": "Pain and pleasure drive you, but they get organized into specific labels — values — that you've ranked into a hierarchy you mostly didn't choose. Layered on top of that is a set of rules (beliefs) about what has to be true for those values to feel met. Mismatched values pull people apart; impossible rules guarantee they never feel successful. Surface them, then design them deliberately.",
+      "audio_file": "audio/Day-07-Tony_Robbins_Personal_Power_Day_9_Values_and_Beliefs_The_Source_of_Success_or_Failure.mp3",
+      "transcript_file": "transcripts/Day-07-Tony_Robbins_Personal_Power_Day_9_Values_and_Beliefs_The_Source_of_Success_or_Failure.txt",
+      "data_file": "data/day-07.json"
+    },
+    {
+      "day": 8,
+      "videoId": "J1iaFwx_kAQ",
+      "covers": [
+        10
+      ],
+      "title": "How to Take Complete Control of Your Life — The Dickens Pattern",
+      "duration_seconds": 2469,
+      "summary": "Beliefs feel like facts about reality, but they're generalizations you've built and can rebuild. Today's tool — the Dickens Pattern, lifted from A Christmas Carol — uses your imagination to make the future cost of a limiting belief unbearable, then conditions a new belief in the vacuum that opens up. The change isn't intellectual; it's somatic. You have to feel both the pain of staying and the pleasure of changing, vividly enough that the nervous system reorganizes.",
+      "audio_file": "audio/Day-08-Tony_Robbins_Personal_Power_Day_10_How_To_Take_Complete_Control_of_Your_Life.mp3",
+      "transcript_file": "transcripts/Day-08-Tony_Robbins_Personal_Power_Day_10_How_To_Take_Complete_Control_of_Your_Life.txt",
+      "data_file": "data/day-08.json"
+    },
+    {
+      "day": 9,
+      "videoId": "u9ZFsQep21w",
+      "covers": [
+        11
+      ],
+      "title": "The Power of Why",
+      "duration_seconds": 1544,
+      "summary": "A short, foundational session before tomorrow's goal-setting workshop. Goals are how you create the future deliberately — but most people treat them as wishes, not as commitments. The variable that separates wishes from commitments is the why behind each one, on both sides: what you'll gain by hitting it, and what it'll cost you not to. Reasons come first; how comes second.",
+      "audio_file": "audio/Day-09-Tony_Robbins_Personal_Power_Day_11_The_Power_of_Why360p.mp3",
+      "transcript_file": "transcripts/Day-09-Tony_Robbins_Personal_Power_Day_11_The_Power_of_Why360p.txt",
+      "data_file": "data/day-09.json"
+    },
+    {
+      "day": 10,
+      "videoId": "d8dHB8jgpIY",
+      "covers": [
+        12,
+        13,
+        14
+      ],
+      "title": "Creating Your Future — The Goal Setting Workshop",
+      "duration_seconds": 3507,
+      "summary": "The workshop session. You produce three lists at speed — personal development, things, economic — without filtering or being practical. Then you tag timelines, pick three one-year goals from each list, and write the why behind each. Two principles run through it: clarity is power, and never leave the site of a goal without taking immediate action toward it. The point of the workshop isn't to plan; it's to commit.",
+      "audio_file": "audio/Day-10-Tony_Robbins_Personal_Power_Day_12_14_Creating_Your_Future_The_Goal_Setting_Workshop.mp3",
+      "transcript_file": "transcripts/Day-10-Tony_Robbins_Personal_Power_Day_12_14_Creating_Your_Future_The_Goal_Setting_Workshop.txt",
+      "data_file": "data/day-10.json"
+    },
+    {
+      "day": 11,
+      "videoId": "Fendk4XYxYQ",
+      "covers": [
+        15
+      ],
+      "title": "Success Conditioning — The Power of Rituals",
+      "duration_seconds": 2006,
+      "summary": "Tony's claim: most of your life is run by rituals you didn't consciously install. Every consistent emotion — depression, frustration, peace, confidence — is the output of a specific recipe you run with your body, focus, and self-talk. Today is about reverse-engineering those recipes so you can choose which ones to keep, which to interrupt, and which to install on purpose. Procrastination is treated as just another ritual, not a character trait.",
+      "audio_file": "audio/Day-11-Tony_Robbins_Personal_Power_Day_15_Success_Conditioning_The_Power_of_Rituals.mp3",
+      "transcript_file": "transcripts/Day-11-Tony_Robbins_Personal_Power_Day_15_Success_Conditioning_The_Power_of_Rituals.txt",
+      "data_file": "data/day-11.json"
+    },
+    {
+      "day": 12,
+      "videoId": "4WMvSQmtyhM",
+      "covers": [
+        16
+      ],
+      "title": "Anchoring Yourself to Success",
+      "duration_seconds": 2480,
+      "summary": "Anchoring is the mechanism behind every conditioned emotional response you have — Pavlov's principle applied to humans. Any unique stimulus that's present while you're in a peak emotional state gets neurologically linked to that state, and later the stimulus alone fires the state. Today is about taking conscious control of a process that's been running on you all your life: install positive anchors on purpose, collapse the negative ones that are silently dragging you down, and use a swish pattern to redirect a habit toward who you're committed to becoming.",
+      "audio_file": "audio/Day-12-Tony_Robbins_Personal_Power_Day_16_Anchoring_Yourself_to_Success_360p.mp3",
+      "transcript_file": "transcripts/Day-12-Tony_Robbins_Personal_Power_Day_16_Anchoring_Yourself_to_Success_360p.txt",
+      "data_file": "data/day-12.json"
+    },
+    {
+      "day": 13,
+      "videoId": "hgTC66HuUwA",
+      "covers": [
+        17
+      ],
+      "title": "How to Condition Yourself for Wealth",
+      "duration_seconds": 2896,
+      "summary": "Tony reframes wealth as a conditioning problem, not an income problem. People in a country full of opportunity routinely fail to build wealth because they've stacked subconscious negative associations to having money — and any progress hits a ceiling and gets sabotaged. Today walks through seven 'wealth wounds' that quietly drain financial life, and ends with two non-obvious moves: making abundance a must (not an accessory), and using contribution to teach the brain there's more than enough.",
+      "audio_file": "audio/Day-13-Tony_Robbins_Personal_Power_Day_17_How_to_Condition_Yourself_for_Wealth_360p.mp3",
+      "transcript_file": "transcripts/Day-13-Tony_Robbins_Personal_Power_Day_17_How_to_Condition_Yourself_for_Wealth_360p.txt",
+      "data_file": "data/day-13.json"
+    },
+    {
+      "day": 14,
+      "videoId": "5o0CKYj0tio",
+      "covers": [
+        18
+      ],
+      "title": "Ending Financial Self-Sabotage",
+      "duration_seconds": 3169,
+      "summary": "Financial self-sabotage isn't a planning problem or a discipline problem — it's a wiring problem. The brain associates pain to having abundance (judgment, taxes, isolation, the unknown) and pleasure to staying where you are. Until those associations flip, working harder just stretches the rubber band that snaps you back. Today is about surfacing the conflicting beliefs you absorbed about money, ridiculing or rewriting them, and starting a daily conditioning practice so your nervous system stops treating wealth as a threat.",
+      "audio_file": "audio/Day-14-Tony_Robbins_Personal_Power_Day_18_Ending_Financial_Self_Sabotage.mp3",
+      "transcript_file": "transcripts/Day-14-Tony_Robbins_Personal_Power_Day_18_Ending_Financial_Self_Sabotage.txt",
+      "data_file": "data/day-14.json"
+    },
+    {
+      "day": 15,
+      "videoId": "fR-9kw8XU7w",
+      "covers": [
+        19,
+        20,
+        21
+      ],
+      "title": "Overcoming Fears of Failure, Success, and Rejection",
+      "duration_seconds": 2856,
+      "summary": "Three fears collapsed into one mechanism: each is just your nervous system running an unhelpful pain association on a label you've defined. Failure, success, and rejection are not events — they're meanings you assign based on rules you mostly didn't choose. Tony walks through redefining the rules, then introduces the Erasure Technique (a swish-style pattern interrupt) and anchoring to physically rewrite the response. The point isn't to never feel fear; it's to stop letting these three specific labels stop you from acting.",
+      "audio_file": "audio/Day-15-Tony_Robbins_Personal_Power_Day_19-21_Overcoming_Fears_of_Failure_Success.mp3",
+      "transcript_file": "transcripts/Day-15-Tony_Robbins_Personal_Power_Day_19-21_Overcoming_Fears_of_Failure_Success.txt",
+      "data_file": "data/day-15.json"
+    },
+    {
+      "day": 16,
+      "videoId": "-26Wos0jVdw",
+      "covers": [
+        22
+      ],
+      "title": "Creating Unstoppable Self-Confidence",
+      "duration_seconds": 1603,
+      "summary": "Confidence isn't a trait you have or lack — it's a state you produce on demand. Tony's argument: you create it through three levers (physiology, focus, beliefs) and reinforce it through a self-feeding loop where small reps of believed success expand what you'll attempt. The trap is waiting to feel confident before acting; the move is producing the state first, then letting performance catch up. The Success Cycle — beliefs drive potential tapped, which drives action, which drives results, which drives beliefs — is the engine.",
+      "audio_file": "audio/Day-16-Tony_Robbins_Personal_Power_Day_22_Eliminating_Self_Sabotage.mp3",
+      "transcript_file": "transcripts/Day-16-Tony_Robbins_Personal_Power_Day_22_Eliminating_Self_Sabotage.txt",
+      "data_file": "data/day-16.json"
+    },
+    {
+      "day": 17,
+      "videoId": "j8f424Rb7qI",
+      "covers": [
+        23
+      ],
+      "title": "How to Increase Your Energy",
+      "duration_seconds": 798,
+      "summary": "A short, biology-first session: the quality of your life is downstream of the quality of your cells, and your cells are run on oxygen and water. Tony argues that the cheapest, fastest leverage on energy isn't motivation — it's getting waste out of the bloodstream by breathing better and eating water-rich foods. Treat this as the physical substrate that everything else in the program runs on.",
+      "audio_file": "audio/Day-17-Tony_Robbins_Personal_Power_Day_23_How_to_Increase_Your_Energy.mp3",
+      "transcript_file": "transcripts/Day-17-Tony_Robbins_Personal_Power_Day_23_How_to_Increase_Your_Energy.txt",
+      "data_file": "data/day-17.json"
+    },
+    {
+      "day": 18,
+      "videoId": "w9V31DphxKs",
+      "covers": [
+        24
+      ],
+      "title": "The Power of Successful Relationships",
+      "duration_seconds": 2047,
+      "summary": "Tony argues the quality of your life is the quality of your relationships, and most relationships die from two specific mechanisms — not from incompatibility. The first is anchoring: you accidentally link negative states to the person you love until you cross a threshold of accumulated pain. The second is failing to keep meeting your partner's specific love and attraction strategy after the courting stage ends. Both are fixable once you can see them.",
+      "audio_file": "audio/Day-18-Tony_Robbins_Personal_Power_Day_24_The_Power_of_Successful_Relationships.mp3",
+      "transcript_file": "transcripts/Day-18-Tony_Robbins_Personal_Power_Day_24_The_Power_of_Successful_Relationships.txt",
+      "data_file": "data/day-18.json"
+    },
+    {
+      "day": 19,
+      "videoId": "l26iGLUy21A",
+      "covers": [
+        25
+      ],
+      "title": "How to Solve Problems Quickly and Effectively",
+      "duration_seconds": 1202,
+      "summary": "Tony's last working session before the close: the variable that decides whether you keep moving isn't the absence of problems — they keep coming as you grow — it's how fast you exit overwhelm and get back to solving. The mechanics are state management, focus discipline, a five-question pattern that flips the brain into solution mode, and a reframe of problems as the literal cause of your expansion.",
+      "audio_file": "audio/Day-19-Tony_Robbins_Personal_Power_Day_25_How_to_Solve_Problems_Quickly_Effectively.mp3",
+      "transcript_file": "transcripts/Day-19-Tony_Robbins_Personal_Power_Day_25_How_to_Solve_Problems_Quickly_Effectively.txt",
+      "data_file": "data/day-19.json"
+    },
+    {
+      "day": 20,
+      "videoId": "z_S1Fd-36D0",
+      "covers": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "title": "My Personal Challenge to You",
+      "duration_seconds": 2007,
+      "summary": "The closing session, covering the final five days as one arc. Tony's argument: the 30 days are not the end — they're the audition for whether you'll commit to a life of constant and never-ending improvement. He distinguishes three life paths (dabbler, stressor, master), reduces 'how to change anything' to four steps, lays out four pillars of life mastery, and ends with what he believes is the actual source of fulfillment — not achievement, but contribution. The deliverable is a four-step short-term plan plus a long-term posture toward your own growth.",
+      "audio_file": "audio/Day-20-Tony_Robbins_Personal_Power_Day_26_30_My_Personal_Challenge_to_You.mp3",
+      "transcript_file": "transcripts/Day-20-Tony_Robbins_Personal_Power_Day_26_30_My_Personal_Challenge_to_You.txt",
+      "data_file": "data/day-20.json"
+    }
+  ]
+}

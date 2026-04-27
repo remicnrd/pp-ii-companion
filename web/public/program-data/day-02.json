@@ -1,0 +1,77 @@
+{
+  "day": 2,
+  "videoId": "EWAb3hRf5UU",
+  "covers": [2],
+  "title": "The Controlling Force That Directs Your Life",
+  "duration_seconds": 2464,
+  "summary": "If personal power is the ability to act, the question is why we so often don't. Tony's answer: every choice is governed by what we associate pain and pleasure to in that moment — not in theory, but in the body. Until you change those associations, no amount of willpower or positive thinking sticks.",
+  "keypoints": [
+    {
+      "title": "Pain avoidance and pleasure seeking are the only two motivators",
+      "body": "Every behavior — what you eat, who you call, how hard you work — is the output of an unconscious pain/pleasure calculation. Procrastination isn't laziness; it's your brain correctly concluding that the action would hurt more right now than the inaction."
+    },
+    {
+      "title": "Pain avoidance is the stronger of the two",
+      "body": "We'll do more to escape pain than to gain pleasure. That's why most real change happens at threshold — when staying the same finally hurts more than changing. The lever isn't 'why I want this'; it's 'what it costs me if I don't'."
+    },
+    {
+      "title": "What's most real is what you focus on",
+      "body": "The chocolate is real when you focus on the taste; the body you want is real when you focus on how you'll feel at the event next week. Behavior changes when the focus shifts. Most people stay stuck because they only ever focus on the cost of acting, never on the cost of not acting."
+    },
+    {
+      "title": "Approach-avoidance — why people sabotage what they say they want",
+      "body": "If you stack 'relationship = love' AND 'relationship = pain' in the same nervous system, you'll move toward it, then away, then toward, then away. Same in business and money. The fix isn't more motivation — it's surfacing the buried pain association and dismantling it."
+    },
+    {
+      "title": "Use pain and pleasure deliberately, before life uses them on you",
+      "body": "Marketers, family, environment — everyone is busy attaching pain and pleasure to things on your behalf. The choice is whether you do it consciously or stay downstream of whoever's loudest. The exercise today is the first deliberate use."
+    },
+    {
+      "title": "Most people fail to act because they haven't found the cost of inaction",
+      "body": "If you've been putting something off, the missing question isn't 'what will I gain?' — it's 'what will it cost me, emotionally and concretely, in 1, 3, 5 years if I keep not doing this?' Get specific enough and the brain reroutes."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Pain/Pleasure Lever (the Leverage Worksheet)",
+      "description": "Tony's tool for forcing your nervous system to re-weight an action you've been avoiding. You write the answers; you don't think them. The act of writing is what makes the associations real enough to shift behavior.",
+      "steps": [
+        {"name": "List the action you've been avoiding", "detail": "Be specific — a phone call, a workout, a finance review. Not 'be healthier'."},
+        {"name": "Name the pain you've been associating with doing it", "detail": "Be honest. 'It will take 2 hours I don't have.' 'I'll feel exposed.' 'I might fail in front of someone.'"},
+        {"name": "Name the pleasure you get from NOT doing it", "detail": "There's always a payoff to inaction or you wouldn't be doing it. Comfort, distraction, avoidance of judgement."},
+        {"name": "List the cost of NOT changing — over 1, 3, 5 years", "detail": "Emotional, physical, financial, relational. Don't be analytical; let it land. The point is to reach threshold."},
+        {"name": "List everything you'll gain by taking action — concrete and emotional", "detail": "Self-respect, momentum, a result you actually want. Stack them until the scale tips."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Pick four actions you've been putting off (different from yesterday's two — we're adding weight). For each, run the full pain/pleasure lever below. Write everything; don't just think it. The point is to make the cost of staying the same heavier than the cost of changing — then you'll act without needing motivation.",
+    "questions": [
+      {
+        "id": "actions",
+        "label": "Four new actions you've been putting off",
+        "guidance": "Concrete things, ideally one per area: business, body, relationships, finances."
+      },
+      {
+        "id": "pain_of_doing",
+        "label": "For each, the pain you currently associate with doing it",
+        "guidance": "What's the story your brain runs when you almost start? Effort, embarrassment, conflict, time loss."
+      },
+      {
+        "id": "pleasure_of_avoiding",
+        "label": "For each, the pleasure you get by NOT doing it",
+        "guidance": "What does avoiding give you? Don't skip this — naming the payoff is half the work."
+      },
+      {
+        "id": "cost_of_inaction",
+        "label": "For each, the cost in 1, 3, 5 years if you keep not doing it",
+        "guidance": "Be specific about your highest-lever stuff. If this is about Reach engine, what does '5 more years of not pushing through' actually mean?"
+      },
+      {
+        "id": "gain_from_action",
+        "label": "For each, what you gain by acting now",
+        "guidance": "Stack until you feel the scale tip. Then go do one of the four — today, not 'soon'."
+      }
+    ]
+  }
+}

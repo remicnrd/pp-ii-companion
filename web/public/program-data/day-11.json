@@ -1,0 +1,92 @@
+{
+  "day": 11,
+  "videoId": "Fendk4XYxYQ",
+  "covers": [15],
+  "title": "Success Conditioning — The Power of Rituals",
+  "duration_seconds": 2006,
+  "summary": "Tony's claim: most of your life is run by rituals you didn't consciously install. Every consistent emotion — depression, frustration, peace, confidence — is the output of a specific recipe you run with your body, focus, and self-talk. Today is about reverse-engineering those recipes so you can choose which ones to keep, which to interrupt, and which to install on purpose. Procrastination is treated as just another ritual, not a character trait.",
+  "keypoints": [
+    {
+      "title": "Consistent emotions are rituals, not events",
+      "body": "If you feel frustrated or sad three times a week, that isn't happenstance — you're running a recipe. There's a posture, a breathing pattern, a focus, a tonality, and a set of pictures that produce the state. Depression takes effort. Once you see the recipe, you can stop running it."
+    },
+    {
+      "title": "Sow a thought, reap a destiny",
+      "body": "Tony's chain: thought → action → habit → character → destiny. The leverage point is far upstream of where most people try to change. You don't fix destiny by gritting harder at the outcome — you fix it by editing the thought patterns that calcify into rituals."
+    },
+    {
+      "title": "Disappointment vs. frustration is a rule difference",
+      "body": "Tony rarely feels disappointment because for him it requires believing nothing can change. Frustration, by contrast, presupposes the result is still possible. Same situation, different rule, completely different state. The rule you assign to a setback determines whether you keep searching or quit."
+    },
+    {
+      "title": "Reverse-engineer your positive states the same way",
+      "body": "Most people treat states like peace, motivation, or love as moods that visit. Recall a moment you felt it strongly, then dissect the recipe — breathing, posture, tempo of self-talk, what you focused on. That recipe is yours to run on demand. You stop waiting for the state to show up."
+    },
+    {
+      "title": "Don't turn a ritual into an identity",
+      "body": "'I am depressed' fuses you with a temporary process. 'I'm running my depression ritual right now' keeps the operator separate from the program — which is what gives you room to interrupt and choose another. The same applies to 'I am a failure'. Failure is a ritual you ran, not a person you are."
+    },
+    {
+      "title": "Procrastination is a pain/pleasure miscalculation",
+      "body": "When you procrastinate, your brain is loading the pain of doing the task and the pleasure of avoiding it — and acting accordingly. Reverse the loading: feel the cost of not doing it, feel the payoff of having done it, and rephrase 'I have to' as 'I choose to'. Most procrastination collapses once the math is rerun honestly."
+    },
+    {
+      "title": "Use the body as the leverage of last resort",
+      "body": "When the ritual still wants to fire, move first. Stand up, change rooms, gesture, change your breathing. State follows physiology faster than it follows reasoning, which is why interrupting the body is usually faster than talking yourself out of the pattern."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Reverse-engineering an emotional ritual",
+      "description": "Use this on any state you have repeatedly — limiting or empowering — to surface the recipe so you can interrupt it or run it on demand.",
+      "steps": [
+        {"name": "Name the state", "detail": "Pick the specific emotion: frustration, overwhelm, peace, motivation. Vague states ('bad') hide the mechanism."},
+        {"name": "Recall a vivid instance", "detail": "Step back into a specific moment when you felt it strongly. Associate into the memory — see what you saw, hear what you heard."},
+        {"name": "Trace step one", "detail": "What did you do first? Posture, gaze, breathing, internal pictures, tonality of self-talk. Be granular — you're writing a recipe an actor could follow."},
+        {"name": "Trace steps two through five", "detail": "Sequence the rest. What belief had to be true? What did you focus on? What language did you use? What did you stop noticing?"},
+        {"name": "Decide: keep, interrupt, or install", "detail": "If it's limiting, design a pattern interrupt for step one. If it's empowering, identify a trigger you can use to fire it on purpose."}
+      ]
+    },
+    {
+      "name": "Five-step procrastination breaker",
+      "description": "Run this when you notice the procrastination ritual starting. It's a deliberate reversal of the pain/pleasure loading that makes inaction feel safer than action.",
+      "steps": [
+        {"name": "Catch the ritual at step one", "detail": "Notice the opening move — 'do I have to do this', the sigh, the tab switch. Awareness is the entry point."},
+        {"name": "Load the cost of not doing it", "detail": "What does this cost me in a week, a month, a year if I keep deferring? Make it concrete and felt, not abstract."},
+        {"name": "Load the payoff of having done it", "detail": "Picture it already done. Who benefits? How does the rest of the day feel? Make the post-completion state vivid."},
+        {"name": "Rephrase 'have to' as 'choose to' or 'get to'", "detail": "'I have to' triggers resistance. 'I want to' or 'I get to' presupposes pleasure. The shift is small in language and large in state."},
+        {"name": "Move the body first", "detail": "Even if the state hasn't shifted, stand, gesture, take the first physical action. State follows action."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Today's work is diagnostic. You're cataloguing the rituals that have been running you so they stop being invisible. Take this seriously — vague answers produce vague leverage. Spend real time on the recipes; that's where the change actually lives.",
+    "questions": [
+      {
+        "id": "limiting_emotions",
+        "label": "Five negative emotions you run on a regular basis — and the recipe for each",
+        "guidance": "Frustration, overwhelm, self-doubt, irritation, anxiety, whatever is genuinely yours. For each, write the steps: what's step one (posture, focus, self-talk), step two, step three. Granular enough that an actor could play you."
+      },
+      {
+        "id": "empowering_emotions",
+        "label": "Five positive emotions you experience regularly — and the recipe for each",
+        "guidance": "Curiosity, focus, gratitude, love, the flow state you get into when shipping. Same drill — what do you do with your body, what do you focus on, what's the tonality of your self-talk. These recipes are assets you'll use later for anchoring."
+      },
+      {
+        "id": "interrupts",
+        "label": "A pattern interrupt for each limiting ritual",
+        "guidance": "Designed in advance, physical, slightly absurd. Stand up and walk outside, change rooms, splash cold water, snap fingers and say a code word. It has to break step one before the recipe completes."
+      },
+      {
+        "id": "procrastination_recipe",
+        "label": "Your specific procrastination ritual — and where it tends to fire",
+        "guidance": "What's the opening move? Tab-switch to Twitter, 'I'll do this after one more coffee', reorganizing the to-do list instead of doing item one. Note the contexts — is it the hardest task in the day, conversations you're avoiding, a specific kind of work on Reach? Pattern-spot."
+      },
+      {
+        "id": "rule_redesign",
+        "label": "Rewrite one rule that's been generating disappointment or frustration",
+        "guidance": "Find one place where your current rule makes the state nearly automatic ('this should already be working', 'they should have replied by now'). Write a replacement that keeps the standard but stops auto-firing the negative state."
+      }
+    ]
+  }
+}

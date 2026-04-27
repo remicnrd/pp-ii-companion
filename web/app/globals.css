@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* Manual class-based dark mode (instead of pure prefers-color-scheme). */
+@variant dark (&:where(.dark, .dark *));
+
+/* Semantic color tokens.
+   LIGHT theme is the default; .dark on <html> swaps them.
+   Names avoid Tailwind built-in collisions (e.g. `text-base` is font-size). */
+@theme {
+  --color-page:        #ffffff;
+  --color-ink:         #18181b;
+  --color-muted:       #52525b;
+  --color-faint:       #71717a;
+  --color-elevate:     #fafafa;
+  --color-elevate-soft: rgba(244, 244, 245, 0.6);
+  --color-line:        #e4e4e7;
+  --color-accent:      #18181b;
+  --color-accent-ink:  #fafafa;
+  --color-warn-bg:     rgba(252, 211, 77, 0.18);
+  --color-warn-line:   #fcd34d;
+  --color-warn-ink:    #92400e;
+  --color-ok:          #047857;
+  --color-danger:      #be123c;
+  --font-sans: var(--font-geist-sans);
+}
+
+.dark {
+  --color-page:        #0a0a0a;
+  --color-ink:         #fafafa;
+  --color-muted:       #a1a1aa;
+  --color-faint:       #71717a;
+  --color-elevate:     #18181b;
+  --color-elevate-soft: rgba(24, 24, 27, 0.55);
+  --color-line:        #27272a;
+  --color-accent:      #fafafa;
+  --color-accent-ink:  #0a0a0a;
+  --color-warn-bg:     rgba(120, 53, 15, 0.25);
+  --color-warn-line:   rgba(180, 83, 9, 0.5);
+  --color-warn-ink:    #fcd34d;
+  --color-ok:          #34d399;
+  --color-danger:      #fb7185;
+}
+
+html, body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input, textarea, select, button { font: inherit; }
+textarea { field-sizing: content; }
+audio { width: 100%; }
+
+/* Disclosure markers for <details> */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary .chev {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+details[open] > summary .chev { transform: rotate(90deg); }

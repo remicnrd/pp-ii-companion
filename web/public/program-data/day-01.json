@@ -1,0 +1,86 @@
+{
+  "day": 1,
+  "videoId": "apo9lDKGMdI",
+  "covers": [1],
+  "title": "The Key to Personal Power",
+  "duration_seconds": 3046,
+  "summary": "The opening session lays out the program's premise: the gap between people who get the life they want and people who don't is rarely capability — it's whether they decide what they want, take action on it, notice what's working, and adjust. Tony introduces the Ultimate Success Formula, which becomes the spine of the next 29 days.",
+  "keypoints": [
+    {
+      "title": "The past does not equal the future",
+      "body": "Whatever results you've had so far — broke, stuck, repeatedly failing — carries no predictive weight for what you do next. The only relevant variable is what you decide to do right now. This isn't optimism; it's a precondition for being able to act at all, because if you treat the past as evidence about your ceiling, you stop trying."
+    },
+    {
+      "title": "Personal power = the ability to act",
+      "body": "Tony defines power literally: power is the ability to act and produce a result. Knowledge isn't power, it's potential power — plenty of people know what they should do and never do it. The whole program is about closing the gap between knowing and doing."
+    },
+    {
+      "title": "Failure and success are accumulations, not events",
+      "body": "Failure isn't one big moment — it's the missed call, the conversation you didn't have, the 80% effort instead of 100%, repeated. Success is the same: lots of small executions stacking up. This reframes daily decisions as the actual unit of progress."
+    },
+    {
+      "title": "The subconscious thermostat — why people sabotage their own wins",
+      "body": "We each carry an internal setpoint for what we think we deserve — emotionally, financially, in relationships. Drop below it and we feel anxiety and push back up. Rise above it and we sabotage ourselves back down: missed meetings, treating people poorly, eating compulsively. Tony went from $10k/month at 19 to broke and 38lbs heavier in months because of this. To raise the ceiling permanently, the setpoint itself has to change — which is why conditioning, not motivation, is the rest of the program."
+    },
+    {
+      "title": "Decision means cutting off the alternatives",
+      "body": "From the Latin de-cidere — to cut off from. A real decision closes other possibilities. 'Trying' or 'thinking about it' isn't a decision; it's a consideration. Most people don't take action because they've never actually decided."
+    },
+    {
+      "title": "Frustration is a signal you're about to break through",
+      "body": "When your brain is frustrated, it's searching. If it keeps searching, it eventually finds. Tony reframes frustration as excitement on purpose, because the alternative — treating it as evidence you can't do this — kills the search before it produces an answer."
+    },
+    {
+      "title": "Modeling is the speed multiplier",
+      "body": "Don't reinvent. Find someone already getting the result you want, study what they actually do (not what they say they do), and replicate the inputs. Tony lost 38lbs by modeling someone who'd stayed thin for years, not by dieting harder. Same playbook for relationships and finances."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Ultimate Success Formula",
+      "description": "Tony's core operating loop for any goal. Day 1 introduces it; later sessions drill into each step.",
+      "steps": [
+        {
+          "name": "Know your outcome",
+          "detail": "Get specific about what you want. Clarity is power. In an argument, a meeting, a project — ask 'what's my outcome here?' before you act. Vague outcomes produce vague action."
+        },
+        {
+          "name": "Take massive action",
+          "detail": "Move toward the outcome. Most people stop here, scared of getting it wrong. The cost of inaction is always higher than the cost of an imperfect attempt."
+        },
+        {
+          "name": "Notice what you're getting",
+          "detail": "Sensory acuity — pay close attention to whether your action is moving you closer to or further from the outcome. Don't bulldoze ahead just because you've already put effort in."
+        },
+        {
+          "name": "Change your approach until you succeed",
+          "detail": "If it's not working, change. If the new thing doesn't work, change again. Keep changing until the outcome lands. Persistence on the wrong approach is just slow failure."
+        },
+        {
+          "name": "Accelerator — model someone already getting the result",
+          "detail": "Skip the trial-and-error tax. Find a person, system, or business that already has what you want and copy the inputs."
+        }
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Today is about exercising the muscle, not perfecting the technique. Pick two actions you've been putting off and take at least one of them now — before this exercise feels finished. The point is to show yourself you can decide and move in the same minute.",
+    "questions": [
+      {
+        "id": "actions",
+        "label": "Two actions you've been putting off",
+        "guidance": "Pick concrete things. A call you've been avoiding, a hard conversation you've been editing in your head, a piece of work you keep deferring. Skip the vague ones (\"eat better\")."
+      },
+      {
+        "id": "decision",
+        "label": "What you've decided about each — and what cutting off the alternatives means here",
+        "guidance": "If 'decide' meant closing any other possibility, what alternative are you closing off? E.g. 'I'm calling X today, and I'm closing off the version where I keep waiting for the right moment.'"
+      },
+      {
+        "id": "now",
+        "label": "Which one are you doing in the next 10 minutes — and what's the first concrete step?",
+        "guidance": "Not later today. Now. Open the email, dial the number, write the first paragraph. The point is collapsing the gap between deciding and acting to zero."
+      }
+    ]
+  }
+}

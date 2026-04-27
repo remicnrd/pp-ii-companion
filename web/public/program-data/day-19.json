@@ -1,0 +1,82 @@
+{
+  "day": 19,
+  "videoId": "l26iGLUy21A",
+  "covers": [25],
+  "title": "How to Solve Problems Quickly and Effectively",
+  "duration_seconds": 1202,
+  "summary": "Tony's last working session before the close: the variable that decides whether you keep moving isn't the absence of problems — they keep coming as you grow — it's how fast you exit overwhelm and get back to solving. The mechanics are state management, focus discipline, a five-question pattern that flips the brain into solution mode, and a reframe of problems as the literal cause of your expansion.",
+  "keypoints": [
+    {
+      "title": "80/20 your attention — solution over problem",
+      "body": "Spend at most 20% of your time describing the problem and at least 80% on the solution. The reason ordinary problems become monsters is that people loop on what's wrong, asking 'why does this always happen to me?' — endless-loop questions that build emotional intensity without producing answers. Identify the challenge briefly, then redirect."
+    },
+    {
+      "title": "Overwhelm is the actual enemy",
+      "body": "You're capable of solving almost any specific problem. What disables that capability is the state of overwhelm — once you're in it, your problem-solving muscle goes offline. So the first move is always state, not strategy. Two long-term moves: associate massive pain to overwhelm so your brain refuses to go there, and associate massive pleasure to solving — because the satisfaction of pulling something back from the edge is one of the most rewarding states available."
+    },
+    {
+      "title": "The expanding-circle frame",
+      "body": "Picture yourself as a dot inside a circle of competence. Problems hit just outside the circle's edge; most people retreat. Ignore them and another shows up, then another, until you're forced to break through. When you do, the circle expands — what was beyond your reach is now inside it. Problems are the mechanism by which you grow; the literal root of the word means 'to throw forth.' You throw the next problem out so you can become the person who can handle it."
+    },
+    {
+      "title": "Use Ultimate Success Formula on the problem itself",
+      "body": "Day 1's loop applies here directly: know the outcome (what does solved look like?), take action, notice what you're getting, change approach until it works. Add the accelerator — find someone who's already solved this version of it and model their inputs. Most challenges in business, relationships, money, and body are common; the solutions are too."
+    },
+    {
+      "title": "Ask 'what would happen if?' to break stuck thinking",
+      "body": "When solutions get shut down with 'that won't work', the search dies. Replacing it with 'what would happen if we tried that?' opens the search again. Generative question, not evaluative. Use this on yourself and in any room where ideas are getting killed before they're tested."
+    },
+    {
+      "title": "Language shapes state — challenge, not problem",
+      "body": "The word 'problem' loads heavy. Tony defaults to 'challenge' in his own head, because the meaning he's attached to challenge is 'opportunity to expand'. Same situation, different state, different access to capability. Worth applying to your own internal vocabulary."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "The Five Problem-Solving Questions",
+      "description": "Tony's standard sequence for moving himself out of overwhelm and into solution mode. Use it on the problem in front of you right now — write the answers down, don't just think them.",
+      "steps": [
+        {"name": "What's great about this?", "detail": "If your brain says 'nothing,' soften to 'what could be great about this?' and force an answer. The act of looking for upside breaks the spiral and changes state."},
+        {"name": "What's not perfect yet?", "detail": "Notice the presupposition — that it's going to be perfect. This is a different category of question than 'what's wrong?' It frames the gap as temporary."},
+        {"name": "What am I willing to do to make it the way I want it?", "detail": "Presupposes that you're willing and that you can. Forces you to commit to specific action, not just complaint."},
+        {"name": "What am I willing to no longer do to make it the way I want it?", "detail": "Often more useful than the previous one. Most stuck situations need a stop, not just a start. What pattern, complaint, identity, or commitment are you willing to drop?"},
+        {"name": "How can I do what's necessary and enjoy the process?", "detail": "The unlock question. The brain is forced to find a way to do the work in a state you'd actually choose to be in. Tony's hundred-callbacks problem became a fun afternoon in the jacuzzi because the question forced the search."}
+      ]
+    },
+    {
+      "name": "The Expanding-Circle Model",
+      "description": "A way of relating to problems that turns them from threats into the visible edge of growth.",
+      "steps": [
+        {"name": "Locate your circle", "detail": "Note what currently sits inside it — what you handle without strain. That's your present capacity, and it's not insulting, it's the baseline."},
+        {"name": "Spot the next problem at the edge", "detail": "The thing just outside your current ability that keeps showing up. It's not random; it's the specific edge you're being asked to extend across."},
+        {"name": "Don't retreat — break through once", "detail": "Most people hit the edge, get uncomfortable, and pull back. Same problem returns — sometimes louder. One breakthrough expands the whole circle, not just the one inch."},
+        {"name": "Expect the next one further out", "detail": "Once you've handled this class of problem, a bigger one shows up at the new edge. This isn't a bug — it's the design. Your capacity grows by being asked to grow."}
+      ]
+    }
+  ],
+  "exercise": {
+    "intro": "Pull a real challenge — the one actually weighing on you right now — and run it through the five questions in writing. Don't answer them in your head. The point of writing is to force completion, especially on the questions where your first instinct is to skip.",
+    "questions": [
+      {
+        "id": "challenge",
+        "label": "The challenge you're going to work on, in one or two sentences",
+        "guidance": "Pick something with current emotional charge — the one your mind keeps circling. For builders, this is often a specific bottleneck (a system that won't scale, a hire that isn't working, a metric that's stuck). Be specific enough that 'solved' would be obvious."
+      },
+      {
+        "id": "five_questions",
+        "label": "Run all five problem-solving questions in writing",
+        "guidance": "1) What's great / could be great about this? 2) What's not perfect yet? 3) What am I willing to do? 4) What am I willing to no longer do? 5) How can I get this done and enjoy the process? Force an answer on each — especially #4 and #5."
+      },
+      {
+        "id": "model",
+        "label": "Who has already solved this? What did they do that you can copy?",
+        "guidance": "A person, a team, a writeup. Even a partial model collapses your search time. If you can't think of anyone, that's information — go find them before you keep grinding."
+      },
+      {
+        "id": "first_action",
+        "label": "The first concrete action you'll take in the next 24 hours",
+        "guidance": "Specific and small enough that it can't slip. The action is what proves you've actually exited overwhelm and re-entered the loop."
+      }
+    ]
+  }
+}
