@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { loadDaysIndex, expectedDayOnDate } from "@/lib/program";
-import { db, getSettings } from "@/lib/db";
+import { loadDaysIndex, nextUnfinishedDay } from "@/lib/program";
+import { db } from "@/lib/db";
 import type { ProgramDayMeta } from "@/lib/types";
 
 export default function ProgramListPage() {
@@ -17,10 +17,21 @@ export default function ProgramListPage() {
       setDays(idx.days);
       const all = await db().dayProgress.toArray();
       const map: Record<number, boolean> = {};
-      for (const p of all) if (p.completedAt) map[p.day] = true;
+      const completedSet = new Set<number>();
+      for (const p of all) {
+        if (p.completedAt) {
+          map[p.day] = true;
+          completedSet.add(p.day);
+        }
+      }
       setCompleted(map);
-      const s = await getSettings();
-      if (s.startDate) setTodayDay(expectedDayOnDate(s.startDate));
+      const total = idx.days.length;
+      // Only show "Next" badge if there's still a day to do.
+      if (completedSet.size < total) {
+        setTodayDay(nextUnfinishedDay(completedSet, total));
+      } else {
+        setTodayDay(null);
+      }
     })();
   }, []);
 
@@ -50,7 +61,7 @@ export default function ProgramListPage() {
                     Day {d.day}
                     {d.covers.length > 1 && ` · covers ${d.covers[0]}–${d.covers[d.covers.length - 1]}`}
                   </p>
-                  {isToday && <span className="text-[10px] uppercase tracking-widest text-warn-ink font-semibold">Today</span>}
+                  {isToday && <span className="text-[10px] uppercase tracking-widest text-warn-ink font-semibold">Next</span>}
                   {isDone && <span className="text-[10px] uppercase tracking-widest text-ok font-semibold">Done</span>}
                 </div>
                 <p className="font-semibold leading-snug">{d.title}</p>

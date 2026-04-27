@@ -56,6 +56,17 @@ export function audioUrlForDay(meta: ProgramDayMeta): string | null {
   return withBasePath("/" + meta.audio_file);
 }
 
+/** First day not marked completed. If all are completed, returns the last day. */
+export function nextUnfinishedDay(
+  completedDayNumbers: Set<number>,
+  total = 20,
+): number {
+  for (let i = 1; i <= total; i++) {
+    if (!completedDayNumbers.has(i)) return i;
+  }
+  return total;
+}
+
 export function expectedDayOnDate(startDate: string, today = new Date()): number {
   const start = new Date(startDate + "T00:00:00");
   const ms = today.getTime() - start.getTime();

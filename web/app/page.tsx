@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getSettings, getProfile } from "@/lib/db";
-import { loadDaysIndex, expectedDayOnDate } from "@/lib/program";
+import { db, getSettings, getProfile } from "@/lib/db";
+import { loadDaysIndex, nextUnfinishedDay } from "@/lib/program";
 import type { ProgramDayMeta, Settings } from "@/lib/types";
 
 export default function Home() {
@@ -11,21 +11,25 @@ export default function Home() {
   const [hasProfile, setHasProfile] = useState(false);
   const [today, setToday] = useState<ProgramDayMeta | null>(null);
   const [allDays, setAllDays] = useState<ProgramDayMeta[]>([]);
+  const [allComplete, setAllComplete] = useState(false);
 
   useEffect(() => {
     (async () => {
       const s = await getSettings();
       const p = await getProfile();
       const idx = await loadDaysIndex();
+      const allProgress = await db().dayProgress.toArray();
+      const completedDays = new Set(
+        allProgress.filter((dp) => dp.completedAt).map((dp) => dp.day),
+      );
       setSettings(s);
       setHasProfile(!!p?.generatedSummary);
       setAllDays(idx.days);
-      if (s.startDate) {
-        const audioDay = expectedDayOnDate(s.startDate);
-        setToday(idx.days.find((d) => d.day === audioDay) ?? null);
-      } else {
-        setToday(idx.days[0]);
-      }
+      const total = idx.days.length;
+      const allDone = completedDays.size >= total;
+      setAllComplete(allDone);
+      const dayNum = nextUnfinishedDay(completedDays, total);
+      setToday(idx.days.find((d) => d.day === dayNum) ?? null);
     })();
   }, []);
 
@@ -40,7 +44,7 @@ export default function Home() {
       <header className="mb-8">
         <p className="text-xs uppercase tracking-widest text-faint mb-2">Personal Power II</p>
         <h1 className="text-3xl font-semibold tracking-tight">
-          {settings.startDate ? "Today's session" : "Welcome"}
+          {allComplete ? "All sessions done" : settings.startDate || hasProfile ? "Up next" : "Welcome"}
         </h1>
       </header>
 
