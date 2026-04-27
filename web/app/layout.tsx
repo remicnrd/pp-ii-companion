@@ -8,11 +8,25 @@ import { PasswordGate } from "@/components/PasswordGate";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
+const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   title: "Personal Power II",
   description: "30-day companion for working through Tony Robbins' Personal Power II",
-  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/manifest.webmanifest`,
-  appleWebApp: { capable: true, title: "PPII", statusBarStyle: "black-translucent" },
+  manifest: `${BP}/manifest.webmanifest`,
+  icons: {
+    icon: [
+      { url: `${BP}/icon-192.png`, sizes: "192x192", type: "image/png" },
+      { url: `${BP}/icon-512.png`, sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: `${BP}/apple-touch-icon.png`, sizes: "180x180" }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "PPII",
+    statusBarStyle: "black-translucent",
+    startupImage: [`${BP}/icon-512.png`],
+  },
   robots: { index: false, follow: false },
 };
 

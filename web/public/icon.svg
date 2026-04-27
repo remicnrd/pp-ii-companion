@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0a0a0a"/>
+  <text x="256" y="265" font-family="system-ui, -apple-system, Arial" font-size="180" font-weight="700"
+        text-anchor="middle" dominant-baseline="middle" fill="#fafafa" letter-spacing="-8">PP</text>
+  <text x="256" y="385" font-family="system-ui, -apple-system, Arial" font-size="80" font-weight="500"
+        text-anchor="middle" dominant-baseline="middle" fill="#a1a1aa" letter-spacing="2">II</text>
+</svg>
