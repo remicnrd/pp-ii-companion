@@ -11,10 +11,7 @@ import {
   getDayProgress,
   saveDayProgress,
 } from "@/lib/db";
-import {
-  extractAndDedupCommitments,
-  regenerateSynthesis,
-} from "@/lib/momentum";
+import { regenerateMomentum } from "@/lib/momentum";
 import { checkExerciseAnswers, feedbackIsStale } from "@/lib/exercise";
 import type {
   ProgramDay,
@@ -22,6 +19,8 @@ import type {
   DayProgress,
 } from "@/lib/types";
 import { Section } from "@/components/Section";
+import { AudioPlayer } from "@/components/AudioPlayer";
+import { withBasePath } from "@/lib/url";
 
 export default function DayClient({
   params,
@@ -93,24 +92,21 @@ export default function DayClient({
     }
   }
 
-  async function commitAnswers() {
+  async function saveAndRegenerate() {
     if (!progress || !data) return;
     await saveAnswers();
     setSavingCommit(true);
     try {
-      const result = await extractAndDedupCommitments(data, progress.exerciseAnswers);
-      if (result.created === 0 && result.merged === 0) {
-        alert("Saved your answers, but no clear commitments were extracted.");
-        return;
-      }
-      // Synthesis runs in the background — refreshes Momentum on next visit.
-      regenerateSynthesis().catch(() => {
-        /* swallow — synthesis is optional */
-      });
+      const result = await regenerateMomentum();
       const parts: string[] = [];
-      if (result.created) parts.push(`${result.created} new`);
-      if (result.merged) parts.push(`${result.merged} merged into existing`);
-      alert(`Saved to Momentum — ${parts.join(", ")}.`);
+      if (result.totalCards) parts.push(`${result.totalCards} cards`);
+      if (result.newCards) parts.push(`${result.newCards} new`);
+      if (result.archivedCards) parts.push(`${result.archivedCards} archived`);
+      alert(
+        result.totalCards
+          ? `Momentum updated — ${parts.join(", ")}.`
+          : "Saved. (No commitments extracted yet — fill more answers.)",
+      );
     } catch (err) {
       alert("Failed: " + (err instanceof Error ? err.message : String(err)));
     } finally {
@@ -153,11 +149,12 @@ export default function DayClient({
               ↓ Save offline
             </button>
           </div>
-          <audio
-            controls
-            preload="metadata"
+          <AudioPlayer
             src={audioUrl}
-            onPlay={async () => {
+            title={data.title}
+            subtitle={`Day ${meta.day} · Personal Power II`}
+            artworkSrc={withBasePath("/icon-512.png")}
+            onPlayed={async () => {
               if (progress && !progress.audioPlayedAt) {
                 const next = { ...progress, audioPlayedAt: Date.now() };
                 setProgress(next);
@@ -229,10 +226,10 @@ export default function DayClient({
           </button>
           <button
             disabled={savingCommit}
-            onClick={commitAnswers}
+            onClick={saveAndRegenerate}
             className="px-4 py-2 rounded-lg bg-accent text-accent-ink text-sm font-medium disabled:opacity-50"
           >
-            {savingCommit ? "Saving…" : "Save & extract commitments"}
+            {savingCommit ? "Updating Momentum…" : "Save & update Momentum"}
           </button>
           <button
             onClick={markComplete}

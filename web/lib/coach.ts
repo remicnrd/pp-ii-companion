@@ -53,22 +53,46 @@ Rules:
     sections.push(`# CALENDAR\n\nThey started the program on ${startDate}. Today is ${today}.`);
   }
 
-  if (commitments.length > 0) {
-    const active = commitments.filter((c) => c.status === "active");
-    const done = commitments.filter((c) => c.status === "done");
+  const liveCommitments = commitments.filter((c) => !c.archivedAt);
+  if (liveCommitments.length > 0) {
+    const daily = liveCommitments.filter((c) => c.classification === "daily");
+    const onceActive = liveCommitments.filter(
+      (c) => c.classification === "once" && c.status === "active",
+    );
+    const onceDone = liveCommitments.filter(
+      (c) => c.classification === "once" && c.status === "done",
+    );
     const lines: string[] = [];
-    if (active.length) {
-      lines.push("## Active commitments");
-      for (const c of active) {
+    if (daily.length) {
+      lines.push("## Daily commitments (habits / rituals — running counters)");
+      for (const c of daily) {
+        const sources = c.sources?.length
+          ? ` (sources: day${c.sources.length > 1 ? "s" : ""} ${c.sources.join(", ")})`
+          : "";
         lines.push(
-          `- [Day ${c.day}, ${c.classification}] ${c.text}${c.rationale ? ` (${c.rationale})` : ""}`,
+          `- ${c.text} — done on ${c.dailyChecks.length} day${
+            c.dailyChecks.length === 1 ? "" : "s"
+          }${
+            c.dailyChecks.length
+              ? ` (most recent: ${c.dailyChecks[c.dailyChecks.length - 1]})`
+              : ""
+          }${sources}`,
         );
       }
     }
-    if (done.length) {
-      lines.push("\n## Completed commitments");
-      for (const c of done) {
-        lines.push(`- [Day ${c.day}] ${c.text}`);
+    if (onceActive.length) {
+      lines.push("\n## Active one-time actions (still pending)");
+      for (const c of onceActive) {
+        const sources = c.sources?.length
+          ? ` (day${c.sources.length > 1 ? "s" : ""} ${c.sources.join(", ")})`
+          : "";
+        lines.push(`- ${c.text}${sources}${c.rationale ? ` — ${c.rationale}` : ""}`);
+      }
+    }
+    if (onceDone.length) {
+      lines.push("\n## Completed one-time actions");
+      for (const c of onceDone) {
+        lines.push(`- ${c.text}`);
       }
     }
     sections.push(`# THEIR COMMITMENTS\n\n${lines.join("\n")}`);

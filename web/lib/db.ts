@@ -37,6 +37,39 @@ export class AppDB extends Dexie {
       memories: "++id, createdAt",
       synthesis: "id",
     });
+    this.version(3)
+      .stores({
+        settings: "id",
+        profile: "id",
+        dayProgress: "day",
+        commitments: "++id, &key, status, classification, archivedAt, createdAt",
+        chatMessages: "++id, createdAt",
+        memories: "++id, createdAt",
+        synthesis: "id",
+      })
+      .upgrade(async (tx) => {
+        // Migrate existing commitments: synthesize a `key` from text, default
+        // dailyChecks/sources, remap "one-time" → "once" and "ongoing" → "daily".
+        await tx
+          .table("commitments")
+          .toCollection()
+          .modify((c: Record<string, unknown>) => {
+            if (!c.key) {
+              const text = String(c.text ?? "untitled");
+              c.key = text
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "")
+                .slice(0, 60) || `legacy-${c.id ?? Date.now()}`;
+            }
+            if (!Array.isArray(c.dailyChecks)) c.dailyChecks = [];
+            if (!Array.isArray(c.sources)) {
+              c.sources = typeof c.day === "number" ? [c.day] : [];
+            }
+            if (c.classification === "one-time") c.classification = "once";
+            if (c.classification === "ongoing") c.classification = "daily";
+          });
+      });
   }
 }
 

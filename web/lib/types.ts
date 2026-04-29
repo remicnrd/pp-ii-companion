@@ -55,14 +55,23 @@ export type DaysIndex = {
 
 export type Commitment = {
   id?: number;
-  day: number;
-  questionId: string;
+  /**
+   * Stable identifier produced by the LLM. Survives regenerations so progress
+   * (status / dailyChecks) is preserved when the model reformulates the text.
+   */
+  key: string;
   text: string;
-  classification: "one-time" | "ongoing" | "unclassified";
+  classification: "once" | "daily" | "unclassified";
   rationale?: string;
+  /** For "once" commitments. */
   status: "active" | "done" | "abandoned";
+  /** ISO date strings (YYYY-MM-DD) for "daily" commitments. */
+  dailyChecks: string[];
+  /** Day numbers (Tony's program day index) that contributed to this commitment. */
+  sources: number[];
   createdAt: number;
   lastReviewedAt?: number;
+  archivedAt?: number;
 };
 
 export type ChatMessage = {

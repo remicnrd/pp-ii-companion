@@ -2,213 +2,335 @@ import {
   db,
   getProfile,
   getSettings,
-  getSynthesis,
   saveSynthesis,
 } from "./db";
 import { oneShot } from "./llm";
+import { loadDay, loadDaysIndex } from "./program";
 import type { Commitment, ProgramDay } from "./types";
 
-type ExtractedItem = {
-  mode: "new" | "merge";
-  mergeWithId?: number;
+/**
+ * Model used specifically for the momentum regeneration. Picked separately from
+ * the chat model because (a) inputs are smaller (no transcripts) and (b) better
+ * reasoning matters more for synthesis than per-token cost.
+ */
+const MOMENTUM_MODEL = "gpt-5.5";
+
+type RegenerateResult = {
+  totalCards: number;
+  newCards: number;
+  archivedCards: number;
+  synthesisGenerated: boolean;
+};
+
+type LLMCard = {
+  key: string;
   text: string;
-  classification: "one-time" | "ongoing";
+  classification: "once" | "daily";
   rationale?: string;
+  sources?: number[];
+};
+
+type LLMResult = {
+  commitments: LLMCard[];
+  removed_keys?: string[];
+  synthesis: string;
 };
 
 /**
- * Extract commitments from one day's exercise answers, deduping against existing
- * active commitments. The LLM either creates a new commitment or merges into an
- * existing one (updating its text + rationale to reflect the reinforcement).
+ * Regenerate the entire commitment set + synthesis from scratch using the LLM,
+ * giving it the user's profile + every completed day's content & answers + the
+ * existing commitments (so it can reuse keys and preserve progress).
  *
- * Returns the number of new + merged items. No-op if there are no answers.
+ * - Reuses existing rows when the LLM repeats a key — preserves status / dailyChecks.
+ * - Inserts new rows for new keys.
+ * - Archives rows whose keys disappear from the LLM output (status preserved,
+ *   archivedAt stamped — not deleted).
+ *
+ * No-op if there's no API key, no completed days, or no answers yet.
  */
-export async function extractAndDedupCommitments(
-  day: ProgramDay,
-  answers: Record<string, string>,
-): Promise<{ created: number; merged: number; skipped: number }> {
+export async function regenerateMomentum(): Promise<RegenerateResult> {
+  const empty: RegenerateResult = {
+    totalCards: 0,
+    newCards: 0,
+    archivedCards: 0,
+    synthesisGenerated: false,
+  };
   const settings = await getSettings();
-  const apiKey = settings.apiKey;
-  if (!apiKey) {
-    // No key — fall back to plain inserts so the user doesn't lose their answers.
-    let created = 0;
-    for (const q of day.exercise.questions) {
-      const text = (answers[q.id] || "").trim();
-      if (!text) continue;
-      await db().commitments.add({
-        day: day.day,
-        questionId: q.id,
-        text,
-        classification: "unclassified",
-        status: "active",
-        createdAt: Date.now(),
-      });
-      created += 1;
-    }
-    return { created, merged: 0, skipped: 0 };
-  }
+  if (!settings.apiKey) return empty;
 
-  const answersText = day.exercise.questions
-    .map((q) => {
-      const ans = (answers[q.id] || "").trim();
-      return ans ? `Q: ${q.label}\nA: ${ans}` : "";
-    })
-    .filter(Boolean)
-    .join("\n\n");
+  const idx = await loadDaysIndex();
+  const allProgress = await db().dayProgress.toArray();
 
-  if (!answersText) return { created: 0, merged: 0, skipped: 0 };
+  // Only consider days the user has actually engaged with (has any answer or
+  // is marked completed). Per user direction: don't reason about days they haven't done.
+  const engagedDays = allProgress.filter((p) => {
+    if (p.completedAt) return true;
+    return Object.values(p.exerciseAnswers || {}).some((v) => (v || "").trim());
+  });
+  if (engagedDays.length === 0) return empty;
 
-  const existingActive = (await db().commitments.toArray()).filter(
-    (c) => c.status === "active",
+  // Load each engaged day's full content
+  const dayBlocks = await Promise.all(
+    engagedDays
+      .sort((a, b) => a.day - b.day)
+      .map(async (p) => {
+        const data: ProgramDay = await loadDay(p.day);
+        const answers = Object.entries(p.exerciseAnswers || {})
+          .map(([qid, val]) => {
+            const q = data.exercise.questions.find((q) => q.id === qid);
+            const trimmed = (val || "").trim();
+            if (!trimmed) return "";
+            return `Q: ${q?.label ?? qid}\nA: ${trimmed}`;
+          })
+          .filter(Boolean)
+          .join("\n\n");
+
+        const keypoints = data.keypoints
+          .map((k) => `- ${k.title}: ${k.body}`)
+          .join("\n");
+        const frameworks = data.frameworks
+          .map((f) => `- ${f.name}`)
+          .join("\n") || "(none)";
+        return `## Day ${p.day} — ${data.title}
+
+${data.summary}
+
+Keypoints:
+${keypoints}
+
+Frameworks introduced:
+${frameworks}
+
+User's exercise answers:
+${answers || "(none)"}`;
+      }),
   );
+
+  const profile = await getProfile();
+  const existing = await db().commitments.toArray();
+  const existingActive = existing.filter((c) => !c.archivedAt);
 
   const existingBlock = existingActive.length
     ? existingActive
         .map(
           (c) =>
-            `id=${c.id} | day=${c.day} | classification=${c.classification} | text="${c.text}"`,
+            `key="${c.key}" | classification=${c.classification} | text="${c.text}"${
+              c.classification === "daily"
+                ? ` | days_done=${c.dailyChecks.length}`
+                : ` | status=${c.status}`
+            }`,
         )
         .join("\n")
-    : "(none yet)";
-
-  const raw = await oneShot(
-    { apiKey, baseURL: settings.baseURL, model: settings.model },
-    {
-      system: `You extract commitments from a user's exercise answers in Tony Robbins' Personal Power II.
-
-You receive:
-1. The user's existing active commitments (with ids).
-2. Today's exercise answers.
-
-For each distinct commitment in today's answers:
-- If it's substantively the SAME or a clear reinforcement of an existing commitment, choose mode "merge" with that mergeWithId. Provide the updated text (the cleaner combined statement) and updated rationale.
-- Otherwise mode "new". Provide text + classification + rationale.
-
-Classifications:
-- "one-time": a discrete action they'll take once
-- "ongoing": a habit, ritual, rule, or recurring practice
-
-Rules:
-- A reinforcement of an existing ongoing commitment from a later session = MERGE, not duplicate.
-- Don't invent commitments not actually present in the answers.
-- text is concise (<= 22 words), rationale <= 18 words.
-- If the answers contain no clear commitment, return [].
-
-Respond ONLY with a JSON array. No prose. Each item:
-{ "mode": "new" | "merge", "mergeWithId": number?, "text": string, "classification": "one-time" | "ongoing", "rationale": string? }`,
-      user: `EXISTING ACTIVE COMMITMENTS:\n${existingBlock}\n\n---\n\nDAY ${day.day} — "${day.title}"\n\n${answersText}`,
-    },
-  );
-
-  let items: ExtractedItem[] = [];
-  try {
-    const match = raw.match(/\[[\s\S]*\]/);
-    items = JSON.parse(match ? match[0] : raw);
-  } catch {
-    items = [];
-  }
-
-  let created = 0;
-  let merged = 0;
-  let skipped = 0;
-  for (const it of items) {
-    if (it.mode === "merge" && typeof it.mergeWithId === "number") {
-      const target = existingActive.find((c) => c.id === it.mergeWithId);
-      if (!target?.id) {
-        skipped += 1;
-        continue;
-      }
-      await db().commitments.update(target.id, {
-        text: it.text || target.text,
-        classification: it.classification || target.classification,
-        rationale: it.rationale || target.rationale,
-        lastReviewedAt: Date.now(),
-      });
-      merged += 1;
-    } else {
-      await db().commitments.add({
-        day: day.day,
-        questionId: "extracted",
-        text: it.text,
-        classification: it.classification,
-        rationale: it.rationale,
-        status: "active",
-        createdAt: Date.now(),
-      });
-      created += 1;
-    }
-  }
-
-  return { created, merged, skipped };
-}
-
-/**
- * Generate a fresh synthesis paragraph over all commitments + the user's profile.
- * Only runs if there are commitments and the user has an API key configured.
- *
- * Triggers callers should use:
- *  - immediately after `extractAndDedupCommitments` if anything changed
- *  - after a status change (done / abandoned / reactivated / deleted)
- *  - when Momentum loads, if the stored synthesis is older than 24h
- */
-export async function regenerateSynthesis(): Promise<void> {
-  const settings = await getSettings();
-  if (!settings.apiKey) return;
-  const all = await db().commitments.toArray();
-  if (all.length === 0) return;
-  const profile = await getProfile();
-
-  const block = all
-    .map(
-      (c) =>
-        `- [${c.status}, ${c.classification}, day ${c.day}] ${c.text}${
-          c.rationale ? ` (${c.rationale})` : ""
-        }`,
-    )
-    .join("\n");
+    : "(no existing commitments — first regeneration)";
 
   const profileBlock = profile?.generatedSummary
-    ? `## User profile\n${profile.generatedSummary}\n\n`
+    ? `# USER PROFILE\n\n${profile.generatedSummary}\n\n---\n\n`
     : "";
 
-  const text = await oneShot(
+  const totalEngagedOf = `${engagedDays.length} of ${idx.days.length} sessions`;
+
+  const userPayload = `${profileBlock}# SESSIONS THE USER HAS WORKED ON (${totalEngagedOf})
+
+${dayBlocks.join("\n\n---\n\n")}
+
+# THEIR EXISTING COMMITMENT CARDS (with stable keys)
+
+${existingBlock}
+
+# TODAY
+
+${new Date().toISOString().slice(0, 10)}`;
+
+  const raw = await oneShot(
     {
       apiKey: settings.apiKey,
       baseURL: settings.baseURL,
-      model: settings.model,
+      model: MOMENTUM_MODEL,
     },
     {
-      system: `You synthesize a tight overview of someone's commitments across Tony Robbins' Personal Power II program. Your job: surface signal, not summarize.
+      system: `You synthesize the user's commitments and a free-form overview from their work in Tony Robbins' Personal Power II.
 
-Output 4 short labelled paragraphs (max 2-3 sentences each):
+You receive: their personal profile, EVERY session they've actually engaged with (transcript distillation + their exercise answers), and their existing commitment cards.
 
-**Themes:** the patterns across these commitments — what they're really pursuing.
-**Loaded right now:** which ongoing commitments would actually compound if maintained, vs which are noise.
-**Conflicts or drift:** internal contradictions, or commitments that have gone stale, or one-time actions older than ~7 days that look unfinished. Be specific (cite which one). If none, say so.
-**Next push:** the one move that would create the most leverage right now, given their highest-lever work and what they've already committed to. Direct, concrete, non-generic.
+You produce two things:
 
-Tone: a sharp friend who took notes, not a wellness app. No hype. No "great progress!" Don't pad.`,
-      user: `${profileBlock}## All commitments (active + completed + abandoned)\n${block}\n\n## Today's date\n${new Date().toISOString().slice(0, 10)}`,
+## 1. Commitment cards
+Each card is something the user has actually committed to in their own answers. Two types:
+
+- "once": a discrete action the user will do once (a specific call, a meeting to schedule, a one-off cleanup, finishing a piece of work).
+- "daily": a recurring practice — habit, ritual, rule, daily review. Something they should hit every day from now on.
+
+For each card:
+- key: stable slug-like id, lowercase-with-hyphens, max 6 words. KEEP existing keys whenever the underlying commitment is the same — even if you reword the text, reuse the key so the user keeps their streak / done state. CREATE new keys only for genuinely new commitments.
+- text: tight statement (max 25 words). Action-first. Concrete. No motivational fluff.
+- classification: "once" or "daily".
+- rationale: short why (max 18 words). What this is connecting to in their life or what session it came from.
+- sources: array of day numbers this commitment came from / was reinforced in.
+
+Rules:
+- Merge similar/duplicate commitments into one card.
+- Don't invent commitments that aren't grounded in the user's answers. If they wrote nothing concrete, that's fine — return fewer cards.
+- Keep "once" cards lean — once it's done, it's done. Don't keep accumulating stale ones.
+- For "daily" cards, prefer cards that compound (e.g. morning questions, journaling) and would actually move the user's highest-lever work. Avoid trivial things.
+- If a previously listed key is no longer represented anywhere in the user's answers, list it under "removed_keys" so we can archive it.
+
+## 2. Synthesis (free-form)
+A short write-up of where the user is right now — their patterns, what's loaded, what's drifting, what would create the most leverage next, conflicts you see, anything notable. Do NOT use a fixed template. Pick whatever structure makes the signal cleanest given THIS user's actual content.
+
+Tone for both: a sharp friend who took good notes. Substance, not motivation. No hype. No "great progress!". Be specific to the user's stated work and lever.
+
+## Output
+
+Respond ONLY with this JSON, no prose around it:
+
+{
+  "commitments": [{ "key": "...", "text": "...", "classification": "once" | "daily", "rationale": "...", "sources": [int] }],
+  "removed_keys": ["..."],
+  "synthesis": "..."
+}`,
+      user: userPayload,
     },
   );
 
-  await saveSynthesis(text.trim(), all.length);
+  let parsed: LLMResult | null = null;
+  try {
+    const match = raw.match(/\{[\s\S]*\}/);
+    parsed = JSON.parse(match ? match[0] : raw);
+  } catch {
+    parsed = null;
+  }
+  if (!parsed || !Array.isArray(parsed.commitments)) {
+    return empty;
+  }
+
+  // ---- Apply the diff ----
+  const existingByKey = new Map(existing.map((c) => [c.key, c]));
+  const incomingKeys = new Set<string>();
+  let newCards = 0;
+
+  for (const card of parsed.commitments) {
+    if (!card.key) continue;
+    incomingKeys.add(card.key);
+    const prev = existingByKey.get(card.key);
+    if (prev?.id) {
+      // Update text/classification but preserve progress (status, dailyChecks).
+      const update: Partial<Commitment> = {
+        text: card.text || prev.text,
+        rationale: card.rationale || prev.rationale,
+        classification: card.classification || prev.classification,
+        sources: card.sources || prev.sources,
+        archivedAt: undefined,
+        lastReviewedAt: Date.now(),
+      };
+      // If classification changes (e.g. once → daily), preserve dailyChecks but
+      // reset done state for "once" reactivations.
+      if (card.classification === "daily" && prev.classification === "once") {
+        update.status = "active";
+      }
+      await db().commitments.update(prev.id, update);
+    } else {
+      await db().commitments.add({
+        key: card.key,
+        text: card.text,
+        classification: card.classification,
+        rationale: card.rationale,
+        sources: card.sources || [],
+        status: "active",
+        dailyChecks: [],
+        createdAt: Date.now(),
+      });
+      newCards++;
+    }
+  }
+
+  // Archive everything not in the incoming set (and not already archived).
+  let archivedCards = 0;
+  const removeKeys = new Set([
+    ...(parsed.removed_keys || []),
+  ]);
+  for (const c of existing) {
+    if (!c.id) continue;
+    if (incomingKeys.has(c.key)) continue;
+    if (c.archivedAt) continue;
+    if (!removeKeys.has(c.key)) {
+      // Conservative: only archive if explicitly in removed_keys. Otherwise leave as-is
+      // so an LLM omission doesn't silently delete user's data.
+      continue;
+    }
+    await db().commitments.update(c.id, { archivedAt: Date.now() });
+    archivedCards++;
+  }
+
+  // Synthesis
+  let synthesisGenerated = false;
+  if (parsed.synthesis && parsed.synthesis.trim()) {
+    const total = (await db().commitments.toArray()).filter((c) => !c.archivedAt).length;
+    await saveSynthesis(parsed.synthesis.trim(), total);
+    synthesisGenerated = true;
+  }
+
+  const totalCards = (await db().commitments.toArray()).filter((c) => !c.archivedAt).length;
+  return { totalCards, newCards, archivedCards, synthesisGenerated };
 }
 
-/**
- * Run regenerateSynthesis if it hasn't been generated today yet.
- */
-export async function maybeRegenerateSynthesisDaily(): Promise<boolean> {
-  const existing = await getSynthesis();
-  if (!existing) {
-    await regenerateSynthesis();
-    return true;
+/** Mark today as a done day for a "daily" commitment. Idempotent. */
+export async function markDailyDone(id: number, on?: string): Promise<void> {
+  const date = on ?? new Date().toISOString().slice(0, 10);
+  const c = await db().commitments.get(id);
+  if (!c) return;
+  if (!c.dailyChecks.includes(date)) {
+    await db().commitments.update(id, {
+      dailyChecks: [...c.dailyChecks, date].sort(),
+      lastReviewedAt: Date.now(),
+    });
   }
-  const last = new Date(existing.generatedAt).toISOString().slice(0, 10);
-  const today = new Date().toISOString().slice(0, 10);
-  if (last !== today) {
-    await regenerateSynthesis();
-    return true;
+}
+
+/** Remove today's mark for a "daily" commitment. */
+export async function unmarkDailyDone(id: number, on?: string): Promise<void> {
+  const date = on ?? new Date().toISOString().slice(0, 10);
+  const c = await db().commitments.get(id);
+  if (!c) return;
+  const next = c.dailyChecks.filter((d) => d !== date);
+  if (next.length !== c.dailyChecks.length) {
+    await db().commitments.update(id, {
+      dailyChecks: next,
+      lastReviewedAt: Date.now(),
+    });
   }
-  return false;
+}
+
+/** Streak = consecutive days with checks ending today (or yesterday if today missing). */
+export function dailyStreak(checks: string[], today = new Date()): number {
+  if (checks.length === 0) return 0;
+  const set = new Set(checks);
+  let streak = 0;
+  // Start from today; if today not done, start from yesterday so the streak still counts.
+  const start = new Date(today);
+  if (!set.has(start.toISOString().slice(0, 10))) {
+    start.setDate(start.getDate() - 1);
+  }
+  for (;;) {
+    const iso = start.toISOString().slice(0, 10);
+    if (set.has(iso)) {
+      streak++;
+      start.setDate(start.getDate() - 1);
+    } else break;
+  }
+  return streak;
+}
+
+/** Total ratio: dates done out of days since the commitment was created. */
+export function dailyRatio(c: Commitment, today = new Date()): { done: number; total: number } {
+  const created = new Date(c.createdAt);
+  // Compute days inclusive
+  const startISO = created.toISOString().slice(0, 10);
+  const todayISO = today.toISOString().slice(0, 10);
+  const dayCount = Math.max(
+    1,
+    Math.floor(
+      (Date.parse(todayISO) - Date.parse(startISO)) / (1000 * 60 * 60 * 24),
+    ) + 1,
+  );
+  return { done: c.dailyChecks.length, total: dayCount };
 }
