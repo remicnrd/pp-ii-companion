@@ -1,5 +1,7 @@
 import { db, getProfile, getSettings } from "./db";
-import { loadDaysIndex, loadFrameworks, loadTranscript } from "./program";
+import { loadDaysIndex, loadFrameworks } from "./program";
+import { withBasePath } from "./url";
+import type { ProgramDay } from "./types";
 
 export async function buildCoachSystem(): Promise<string> {
   const profile = await getProfile();
@@ -9,19 +11,13 @@ export async function buildCoachSystem(): Promise<string> {
   const commitments = await db().commitments.toArray();
   const memories = await db().memories.toArray();
 
-  // Load all transcripts in parallel — these are the deep context.
-  const transcripts = await Promise.all(
-    days.days.map(async (d) => ({
-      day: d.day,
-      title: d.title,
-      text: await loadTranscript(d.day),
-    })),
-  );
-
-  const programDays = await Promise.all(
+  // Per-day program content: keypoints + frameworks + exercise prompts.
+  // No raw transcripts — too noisy and too expensive; the structured notes
+  // below are what the user actually distilled from each session.
+  const programDays: ProgramDay[] = await Promise.all(
     days.days.map(async (d) => {
       const padded = d.day.toString().padStart(2, "0");
-      const res = await fetch(`/program-data/day-${padded}.json`);
+      const res = await fetch(withBasePath(`/program-data/day-${padded}.json`));
       return await res.json();
     }),
   );
@@ -31,26 +27,28 @@ export async function buildCoachSystem(): Promise<string> {
 
   const sections: string[] = [];
 
-  sections.push(`You are the Coach for someone working through Tony Robbins' Personal Power II.
+  // Tone instructions — explicit anti-patterns because models default to coach-bro voice.
+  sections.push(`You're a thinking partner for someone going through Personal Power II. Not a coach in the motivational sense. Closer to a friend they trust to think clearly with them about their actual work and life.
 
-Your job is to help them apply what they're learning to the highest-leverage parts of their life — not to summarize, hype, or motivate. Be direct, specific, and useful. Push them on what matters; don't soften.
+How to write:
+- Quiet, specific, useful. No coachy register at all.
+- Skip motivational vocabulary entirely. Don't say "massive", "high-leverage", "highest-lever", "you got this", "step into your power", "lean in", "make it happen", "let's go", "trust the process", "embrace the". That whole register, dropped.
+- Match the user's energy. Terse → terse. Reflective → reflective.
+- When their question is vague, return one specific clarifying question and stop. Don't speculate.
+- Reference Tony's frameworks by name when it actually helps (NAC, Dickens Pattern, threshold, RPM, anchoring, the Ultimate Success Formula, etc.). Don't lecture; the name is just shorthand.
+- If they've committed to something and seem to be drifting, say it once. Don't moralize.
+- Don't end every reply with a question. Only when one would actually move them.
+- Default to short. A paragraph or two. Long replies usually mean padding.
+- If they ask you to remember something durable, say "saved" — they can confirm via the memory button.
 
-Tone: a sharp friend who has read the entire program and remembers everything they've told you. Substance over slogans. Never write like a LinkedIn motivation post.
-
-Rules:
-- If they've skipped or not delivered on commitments, name it. Be honest, not punishing.
-- When they ask vague questions, ask one specific clarifier instead of speculating.
-- When you cite a framework, name it (e.g. "this is the Dickens Pattern from Day 8").
-- If they're drifting toward small wins ("wake at 6am") instead of high-leverage work, redirect without preachiness.
-- If they ask you to remember something durable, say "saved" — the user can confirm via a memory button.
-- Keep responses tight. Don't pad. End with a question only when one would actually unstick them.`);
+You have access to: their personal profile, the program's per-day notes (summary + keypoints + frameworks + exercise prompts), the consolidated frameworks library, their commitments (with daily-streak data), and any saved memories. You do NOT have full transcripts — refer to keypoints and framework names instead of "Tony said".`);
 
   if (profile?.generatedSummary) {
-    sections.push(`# WHO THIS USER IS\n\n${profile.generatedSummary}`);
+    sections.push(`# Who they are\n\n${profile.generatedSummary}`);
   }
 
   if (startDate) {
-    sections.push(`# CALENDAR\n\nThey started the program on ${startDate}. Today is ${today}.`);
+    sections.push(`# Calendar\n\nThey started the program on ${startDate}. Today is ${today}.`);
   }
 
   const liveCommitments = commitments.filter((c) => !c.archivedAt);
@@ -64,86 +62,73 @@ Rules:
     );
     const lines: string[] = [];
     if (daily.length) {
-      lines.push("## Daily commitments (habits / rituals — running counters)");
+      lines.push("## Daily (habits / rituals — running counters)");
       for (const c of daily) {
         const sources = c.sources?.length
-          ? ` (sources: day${c.sources.length > 1 ? "s" : ""} ${c.sources.join(", ")})`
+          ? ` · day${c.sources.length > 1 ? "s" : ""} ${c.sources.join(", ")}`
+          : "";
+        const recent = c.dailyChecks.length
+          ? ` · most recent ${c.dailyChecks[c.dailyChecks.length - 1]}`
           : "";
         lines.push(
-          `- ${c.text} — done on ${c.dailyChecks.length} day${
-            c.dailyChecks.length === 1 ? "" : "s"
-          }${
-            c.dailyChecks.length
-              ? ` (most recent: ${c.dailyChecks[c.dailyChecks.length - 1]})`
-              : ""
-          }${sources}`,
+          `- ${c.text} — done ${c.dailyChecks.length}×${recent}${sources}`,
         );
       }
     }
     if (onceActive.length) {
-      lines.push("\n## Active one-time actions (still pending)");
+      lines.push("\n## One-time, still pending");
       for (const c of onceActive) {
         const sources = c.sources?.length
-          ? ` (day${c.sources.length > 1 ? "s" : ""} ${c.sources.join(", ")})`
+          ? ` · day${c.sources.length > 1 ? "s" : ""} ${c.sources.join(", ")}`
           : "";
         lines.push(`- ${c.text}${sources}${c.rationale ? ` — ${c.rationale}` : ""}`);
       }
     }
     if (onceDone.length) {
-      lines.push("\n## Completed one-time actions");
-      for (const c of onceDone) {
-        lines.push(`- ${c.text}`);
-      }
+      lines.push("\n## One-time, done");
+      for (const c of onceDone) lines.push(`- ${c.text}`);
     }
-    sections.push(`# THEIR COMMITMENTS\n\n${lines.join("\n")}`);
+    sections.push(`# Their commitments\n\n${lines.join("\n")}`);
   }
 
   if (memories.length > 0) {
     sections.push(
-      `# SAVED MEMORIES (things they asked you to remember)\n\n${memories
-        .map((m) => "- " + m.text)
-        .join("\n")}`,
+      `# Saved memories\n\n${memories.map((m) => "- " + m.text).join("\n")}`,
     );
   }
 
-  // Day summaries + keypoints + frameworks (compact form, one block per day).
   const daySummaries = programDays
-    .map(
-      (
-        d: {
-          day: number;
-          title: string;
-          summary: string;
-          keypoints: { title: string; body: string }[];
-          frameworks: { name: string }[];
-          exercise: { questions: { label: string }[] };
-        },
-      ) => {
-        const kps = d.keypoints
-          .map((k) => `- ${k.title}: ${k.body}`)
-          .join("\n");
-        const fws = d.frameworks.map((f) => `- ${f.name}`).join("\n") || "(none)";
-        return `## Day ${d.day} — ${d.title}\n\n${d.summary}\n\nKeypoints:\n${kps}\n\nFrameworks introduced:\n${fws}`;
-      },
-    )
-    .join("\n\n");
-  sections.push(`# PROGRAM CONTENT — keypoints, frameworks, summaries\n\n${daySummaries}`);
+    .map((d) => {
+      const kps = d.keypoints
+        .map((k) => `- ${k.title}: ${k.body}`)
+        .join("\n");
+      const fws =
+        d.frameworks.map((f) => `- ${f.name}`).join("\n") || "(none introduced this day)";
+      const ex = d.exercise.questions.map((q) => `- ${q.label}`).join("\n");
+      return `## Day ${d.day} — ${d.title}
 
-  // Full frameworks library.
+${d.summary}
+
+Keypoints:
+${kps}
+
+Frameworks introduced:
+${fws}
+
+Exercise questions (what the user was prompted to answer):
+${ex}`;
+    })
+    .join("\n\n");
+  sections.push(`# Program — per-day notes\n\n${daySummaries}`);
+
   const fwBlock = frameworks.frameworks
     .map(
       (f) =>
-        `### ${f.name} (intro'd Day ${f.introduced_day})\n${f.description}\n` +
+        `### ${f.name} (Day ${f.introduced_day})\n${f.description}\n` +
         f.steps.map((s, i) => `${i + 1}. ${s.name} — ${s.detail}`).join("\n"),
     )
     .join("\n\n");
-  sections.push(`# FRAMEWORKS LIBRARY\n\n${fwBlock}`);
-
-  // Full transcripts (load-bearing — the user explicitly wants Coach to have the actual content).
-  const trBlock = transcripts
-    .map((t) => `## Day ${t.day} — ${t.title}\n\n${t.text}`)
-    .join("\n\n");
-  sections.push(`# RAW TRANSCRIPTS (full)\n\n${trBlock}`);
+  sections.push(`# Frameworks library (with steps)\n\n${fwBlock}`);
 
   return sections.join("\n\n---\n\n");
 }
