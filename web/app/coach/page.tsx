@@ -154,6 +154,14 @@ export default function CoachPage() {
             </div>
           </div>
         ))}
+        {streaming && !streamed && (
+          <div className="rounded-2xl px-4 py-2.5 max-w-[85%] text-sm leading-relaxed bg-elevate-soft border border-line text-faint inline-flex items-center gap-2">
+            <span className="thinking-dots">
+              <span /><span /><span />
+            </span>
+            <span>Thinking…</span>
+          </div>
+        )}
         {streaming && streamed && (
           <div className="rounded-2xl px-4 py-2.5 max-w-[85%] text-sm leading-relaxed whitespace-pre-wrap bg-elevate-soft border border-line">
             {streamed}
