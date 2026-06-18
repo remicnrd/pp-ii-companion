@@ -13,6 +13,8 @@ const items = [
 
 export function BottomNav() {
   const pathname = usePathname();
+  // v2 lives under /v2 and renders its own chrome — hide the v1 nav there.
+  if (pathname === "/v2" || pathname.startsWith("/v2/")) return null;
   return (
     <nav className="fixed bottom-0 inset-x-0 z-40 bg-page/95 backdrop-blur border-t border-line pb-[env(safe-area-inset-bottom)]">
       <ul className="flex justify-around max-w-2xl mx-auto px-2">
