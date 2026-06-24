@@ -11,10 +11,20 @@ import {
   updateThermoArea,
   vdb,
 } from "@/lib/v2/db";
+import { reviewSelfModel } from "@/lib/v2/coach";
 import { streakFromDates } from "@/lib/v2/selfModel";
 import { DOMAINS } from "@/lib/v2/types";
-import type { Belief, CoreValue, Domain, ThermostatArea } from "@/lib/v2/types";
+import type { Belief, CoreValue, Domain, SelfReview, ThermostatArea } from "@/lib/v2/types";
 import { Btn, Card, Field, Label, notifySelfModelChanged } from "@/components/v2/ui";
+
+function ageLabel(ts: number): string {
+  const m = Math.floor((Date.now() - ts) / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
+}
 
 export default function YouPage() {
   const [loaded, setLoaded] = useState(false);
@@ -31,12 +41,27 @@ export default function YouPage() {
   const [newValue, setNewValue] = useState("");
   const [newRule, setNewRule] = useState("");
 
+  const [review, setReview] = useState<SelfReview | null>(null);
+  const [reviewing, setReviewing] = useState(false);
+
   async function refresh() {
     const s = await getV2Settings();
     setIntent(s.intentName ?? "");
+    setReview(s.review ?? null);
     setBeliefs((await vdb().beliefs.toArray()).filter((b) => !b.archivedAt).sort((a, b) => a.createdAt - b.createdAt));
     setAreas((await vdb().thermoAreas.toArray()).sort((a, b) => a.createdAt - b.createdAt));
     setValues((await vdb().values.toArray()).sort((a, b) => a.rank - b.rank || a.createdAt - b.createdAt));
+  }
+
+  async function runReview() {
+    setReviewing(true);
+    try {
+      setReview(await reviewSelfModel());
+    } catch (e) {
+      alert(e instanceof Error ? e.message : String(e));
+    } finally {
+      setReviewing(false);
+    }
   }
 
   useEffect(() => {
@@ -86,6 +111,8 @@ export default function YouPage() {
     setAddingBelief(false);
     await refresh();
     notifySelfModelChanged();
+    // If they've already used the review, re-check the big picture with the new card.
+    if (review) await runReview();
   }
 
   async function addValue() {
@@ -210,6 +237,7 @@ export default function YouPage() {
           {beliefs.map((b) => {
             const domain = DOMAINS.find((d) => d.key === b.domain);
             const st = streakFromDates(b.conditionedDates ?? []);
+            const rv = review?.beliefs.find((x) => x.id === b.id);
             return (
               <li key={b.id} className="pt-1 flex items-start gap-3">
                 <div className="flex-1 min-w-0">
@@ -221,12 +249,46 @@ export default function YouPage() {
                     {domain?.label}
                     {st > 0 && `${domain ? " · " : ""}conditioned ${st} day${st > 1 ? "s" : ""} running`}
                   </p>
+                  {rv && rv.note && (
+                    <p
+                      className="text-[12px] mt-1.5 leading-snug"
+                      style={{ color: rv.verdict === "solid" ? "var(--v2-accent)" : "#e6b07a" }}
+                    >
+                      {rv.verdict === "solid" ? "✓ " : "rethink — "}
+                      {rv.note}
+                    </p>
+                  )}
                 </div>
                 <button onClick={() => archive(b)} className="v2-press text-sm shrink-0" style={{ color: "var(--v2-faint)" }} aria-label="Remove">✕</button>
               </li>
             );
           })}
         </ul>
+
+        {/* Coach's big-picture read of the set */}
+        <div className="mt-4 pt-4" style={{ borderTop: "1px solid var(--v2-line)" }}>
+          {review ? (
+            <>
+              <div className="flex items-center justify-between mb-1.5">
+                <Label>Coach&apos;s read</Label>
+                <button onClick={runReview} disabled={reviewing} className="text-xs v2-press disabled:opacity-40" style={{ color: "var(--v2-accent)" }}>
+                  {reviewing ? "Reviewing…" : "Re-review"}
+                </button>
+              </div>
+              <p className="text-sm leading-relaxed whitespace-pre-wrap" style={{ color: "var(--v2-muted)" }}>{review.overall}</p>
+              <p className="text-[10px] mt-2" style={{ color: "var(--v2-faint)" }}>Reviewed {ageLabel(review.generatedAt)} · notes show under each belief above</p>
+            </>
+          ) : (
+            <button
+              onClick={runReview}
+              disabled={reviewing || beliefs.length === 0}
+              className="text-sm v2-press disabled:opacity-40"
+              style={{ color: "var(--v2-accent)" }}
+            >
+              {reviewing ? "Reviewing…" : "✦ Have the coach review these — are they the right things, framed right?"}
+            </button>
+          )}
+        </div>
       </Card>
 
       {/* Values */}

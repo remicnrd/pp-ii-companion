@@ -100,6 +100,19 @@ export type CoachMessageV2 = {
   createdAt: number;
 };
 
+// A holistic, substantive read of the user's self-model from the coach — big
+// picture (are these the right things, well organized?) plus a per-belief verdict.
+export type BeliefVerdict = {
+  id: number;
+  verdict: "solid" | "reconsider";
+  note: string;
+};
+export type SelfReview = {
+  overall: string;
+  beliefs: BeliefVerdict[];
+  generatedAt: number;
+};
+
 export type V2Settings = {
   id: "default";
   apiKey?: string;
@@ -107,4 +120,5 @@ export type V2Settings = {
   model?: string;
   startDate?: string;
   intentName?: string; // what the user calls the change they're after
+  review?: SelfReview; // last coach review of the self-model
 };
