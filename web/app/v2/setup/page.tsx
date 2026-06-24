@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { DEFAULT_BASE_URL, DEFAULT_MODEL } from "@/lib/llm";
+import { DEFAULT_BASE_URL } from "@/lib/llm";
 import { loadDaysIndex, audioUrlForDay } from "@/lib/program";
 import { getV2Settings, importKeyFromV1, saveV2Settings, vdb } from "@/lib/v2/db";
+import { buildCoachMarkdown, V2_COACH_MODEL } from "@/lib/v2/coach";
 import { Btn, Card, Field, Label } from "@/components/v2/ui";
 
 export default function V2Setup() {
@@ -25,7 +26,13 @@ export default function V2Setup() {
 
   useEffect(() => {
     (async () => {
-      const s = await getV2Settings();
+      let s = await getV2Settings();
+      // Auto-pull the key from the v1 app if v2 doesn't have one yet, so it just
+      // works without the user having to think about importing.
+      if (!s.apiKey) {
+        const imported = await importKeyFromV1();
+        if (imported) s = await getV2Settings();
+      }
       setApiKey(s.apiKey ?? "");
       setBaseURL(s.baseURL ?? "");
       setModel(s.model ?? "");
@@ -95,6 +102,28 @@ export default function V2Setup() {
     URL.revokeObjectURL(a.href);
   }
 
+  async function exportMarkdown() {
+    toast("Building…");
+    const md = await buildCoachMarkdown();
+    const blob = new Blob([md], { type: "text/markdown" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `ppii-context-${new Date().toISOString().slice(0, 10)}.md`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast("Markdown exported.");
+  }
+
+  async function copyMarkdown() {
+    try {
+      const md = await buildCoachMarkdown();
+      await navigator.clipboard.writeText(md);
+      toast("Copied to clipboard.");
+    } catch {
+      toast("Couldn't copy — try Export.");
+    }
+  }
+
   async function importData(file: File) {
     if (!confirm("Import this backup? It merges into your current v2 data.")) return;
     try {
@@ -143,7 +172,10 @@ export default function V2Setup() {
           <summary className="text-xs cursor-pointer" style={{ color: "var(--v2-faint)" }}>Advanced — base URL & model</summary>
           <div className="pt-3 space-y-2.5">
             <Field value={baseURL} onChange={setBaseURL} placeholder={DEFAULT_BASE_URL} />
-            <Field value={model} onChange={setModel} placeholder={DEFAULT_MODEL} />
+            <Field value={model} onChange={setModel} placeholder={V2_COACH_MODEL} />
+            <p className="text-[11px]" style={{ color: "var(--v2-faint)" }}>
+              Coach defaults to <code>{V2_COACH_MODEL}</code> — current, reasons well, mid-cost. Leave blank to use it, or set e.g. <code>gpt-5-mini</code> for cheaper.
+            </p>
           </div>
         </details>
       </Card>
@@ -158,7 +190,7 @@ export default function V2Setup() {
           style={{ background: "rgba(0,0,0,0.25)", border: "1px solid var(--v2-line)", color: "var(--v2-ink)", colorScheme: "dark" }}
         />
         <div className="mt-4">
-          <Label>What you're becoming</Label>
+          <Label>What you're working toward</Label>
           <Field value={intent} onChange={setIntent} placeholder="someone who finishes what they start" />
         </div>
       </Card>
@@ -192,6 +224,17 @@ export default function V2Setup() {
               e.target.value = "";
             }}
           />
+        </div>
+      </Card>
+
+      <Card className="p-5 mb-4 v2-rise">
+        <Label>Share with another AI</Label>
+        <p className="text-sm mb-3" style={{ color: "var(--v2-muted)" }}>
+          A Markdown brief of the whole program, your own session notes, and your self-model. Paste it into ChatGPT, Claude, or anything else to get a coach that already knows everything.
+        </p>
+        <div className="flex gap-2">
+          <Btn variant="primary" onClick={copyMarkdown}>Copy context</Btn>
+          <Btn onClick={exportMarkdown}>Download .md</Btn>
         </div>
       </Card>
 

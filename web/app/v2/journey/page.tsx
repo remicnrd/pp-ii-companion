@@ -32,7 +32,7 @@ export default function JourneyPage() {
     <div className="max-w-md mx-auto px-5 pt-12">
       <header className="mb-6 v2-rise">
         <Label>The arc</Label>
-        <h1 className="text-[26px] font-semibold tracking-tight">Install the engine, then rewrite your life</h1>
+        <h1 className="text-[26px] font-semibold tracking-tight">How the program builds</h1>
         <p className="text-sm mt-2" style={{ color: "var(--v2-muted)" }}>
           {completed.size} of {days.length} sessions done. Each one installs a shift — they build.
         </p>

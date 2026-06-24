@@ -1,44 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { type ReactNode } from "react";
 import { Aurora } from "@/components/v2/Aurora";
 import { V2Nav } from "@/components/v2/V2Nav";
-import { vdb } from "@/lib/v2/db";
-import { computeWarmth, hueForWarmth } from "@/lib/v2/selfModel";
 
+/**
+ * The aurora's color is fixed (cool indigo). It used to warm as the thermostat
+ * rose, but that's intentionally removed — the steady look reads better and the
+ * thermostat shouldn't repaint the whole app. Hue/warmth defaults live in the
+ * `.v2-root` CSS rule.
+ */
 export default function V2Layout({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  const [warmth, setWarmth] = useState(0);
-
-  const recompute = useCallback(async () => {
-    try {
-      const readings = await vdb().thermostat.toArray();
-      setWarmth(computeWarmth(readings));
-    } catch {
-      /* db not ready */
-    }
-  }, []);
-
-  useEffect(() => {
-    recompute();
-    const onChange = () => recompute();
-    window.addEventListener("v2:selfmodel-changed", onChange);
-    return () => window.removeEventListener("v2:selfmodel-changed", onChange);
-  }, [recompute, pathname]);
-
-  const hue = hueForWarmth(warmth);
-
   return (
-    <div
-      className="v2-root"
-      style={
-        {
-          "--v2-hue": String(hue),
-          "--v2-warmth": String(warmth),
-        } as React.CSSProperties
-      }
-    >
+    <div className="v2-root">
       <Aurora />
       <div className="v2-scroll min-h-[100dvh] pb-28">{children}</div>
       <V2Nav />

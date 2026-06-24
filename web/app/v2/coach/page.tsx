@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { streamMessage } from "@/lib/llm";
-import { getV2Settings, vdb } from "@/lib/v2/db";
-import { buildV2CoachSystem, suggestedPrompts } from "@/lib/v2/coach";
+import { getV2Settings, importKeyFromV1, vdb } from "@/lib/v2/db";
+import { buildV2CoachSystem, suggestedPrompts, V2_COACH_MODEL } from "@/lib/v2/coach";
 import type { CoachMessageV2 } from "@/lib/v2/types";
 import { Label } from "@/components/v2/ui";
 
@@ -21,7 +21,10 @@ export default function V2Coach() {
     (async () => {
       const all = await vdb().coachMessages.orderBy("createdAt").toArray();
       setMessages(all);
-      const s = await getV2Settings();
+      let s = await getV2Settings();
+      if (!s.apiKey) {
+        if (await importKeyFromV1()) s = await getV2Settings();
+      }
       setHasKey(!!s.apiKey);
       const beliefs = await vdb().beliefs.count();
       setPrompts(suggestedPrompts(beliefs > 0));
@@ -51,7 +54,7 @@ export default function V2Coach() {
 
     let acc = "";
     await streamMessage(
-      { apiKey: settings.apiKey, baseURL: settings.baseURL, model: settings.model },
+      { apiKey: settings.apiKey, baseURL: settings.baseURL, model: settings.model || V2_COACH_MODEL },
       { system, messages: history },
       {
         onText: (chunk) => {

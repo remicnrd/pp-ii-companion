@@ -9,8 +9,7 @@ import {
   updateBelief,
   vdb,
 } from "@/lib/v2/db";
-import { beliefStateIndex } from "@/lib/v2/selfModel";
-import { BELIEF_STATES, DOMAINS } from "@/lib/v2/types";
+import { DOMAINS } from "@/lib/v2/types";
 import type { Belief, CoreValue, Domain } from "@/lib/v2/types";
 import { Btn, Card, Field, Label, notifySelfModelChanged } from "@/components/v2/ui";
 
@@ -48,14 +47,6 @@ export default function YouPage() {
   async function changeThermo(domain: Domain, level: number) {
     setThermo((t) => ({ ...t, [domain]: level }));
     await setThermostat(domain, level);
-    notifySelfModelChanged();
-  }
-
-  async function moveBelief(b: Belief, dir: 1 | -1) {
-    const i = beliefStateIndex(b.state);
-    const next = Math.max(0, Math.min(BELIEF_STATES.length - 1, i + dir));
-    await updateBelief(b.id!, { state: BELIEF_STATES[next].key });
-    await refresh();
     notifySelfModelChanged();
   }
 
@@ -104,7 +95,7 @@ export default function YouPage() {
     <div className="max-w-md mx-auto px-5 pt-12">
       <header className="mb-6 v2-rise">
         <Label>You</Label>
-        <h1 className="text-[26px] font-semibold tracking-tight">Who you're becoming</h1>
+        <h1 className="text-[26px] font-semibold tracking-tight">What you're working on</h1>
       </header>
 
       {/* Intent */}
@@ -122,7 +113,7 @@ export default function YouPage() {
       {/* Thermostat */}
       <Card className="p-5 mb-4 v2-rise v2-rise-2">
         <Label>The thermostat — what you believe you deserve</Label>
-        <p className="text-sm mb-4" style={{ color: "var(--v2-muted)" }}>Move these honestly. The whole screen warms as it rises.</p>
+        <p className="text-sm mb-4" style={{ color: "var(--v2-muted)" }}>Set each one honestly — it's the setpoint you quietly defend. Naming it is the first step to raising it.</p>
         <div className="space-y-4">
           {DOMAINS.map((d) => {
             const level = thermo[d.key] ?? 25;
@@ -149,7 +140,7 @@ export default function YouPage() {
       {/* Beliefs */}
       <Card className="p-5 mb-4 v2-rise v2-rise-3">
         <div className="flex items-center justify-between mb-1">
-          <Label>Beliefs you're rewiring</Label>
+          <Label>Beliefs you're changing</Label>
           <button onClick={() => setAddingBelief((v) => !v)} className="text-xs v2-press" style={{ color: "var(--v2-accent)" }}>
             {addingBelief ? "Cancel" : "+ Add"}
           </button>
@@ -187,29 +178,19 @@ export default function YouPage() {
 
         <ul className="space-y-4 mt-2">
           {beliefs.map((b) => {
-            const idx = beliefStateIndex(b.state);
             const domain = DOMAINS.find((d) => d.key === b.domain);
             return (
-              <li key={b.id} className="pt-1">
-                {b.limiting && (
-                  <p className="text-sm line-through" style={{ color: "var(--v2-faint)" }}>{b.limiting}</p>
-                )}
-                <p className="text-[15px] leading-snug font-medium mt-0.5">{b.empowering || "(no replacement yet)"}</p>
-                <div className="flex items-center gap-3 mt-2">
-                  <div className="flex gap-1">
-                    {BELIEF_STATES.map((s, i) => (
-                      <span key={s.key} className={`v2-pip ${i <= idx ? "v2-pip-on" : ""}`} />
-                    ))}
-                  </div>
-                  <span className="text-[11px]" style={{ color: "var(--v2-faint)" }}>
-                    {BELIEF_STATES[idx].label}{domain ? ` · ${domain.label}` : ""}
-                  </span>
-                  <span className="ml-auto flex items-center gap-2">
-                    <button onClick={() => moveBelief(b, -1)} disabled={idx === 0} className="v2-press text-sm disabled:opacity-30" style={{ color: "var(--v2-faint)" }}>−</button>
-                    <button onClick={() => moveBelief(b, 1)} disabled={idx === BELIEF_STATES.length - 1} className="v2-press text-sm disabled:opacity-30" style={{ color: "var(--v2-accent)" }}>advance →</button>
-                    <button onClick={() => archive(b)} className="v2-press text-sm" style={{ color: "var(--v2-faint)" }}>✕</button>
-                  </span>
+              <li key={b.id} className="pt-1 flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  {b.limiting && (
+                    <p className="text-sm line-through" style={{ color: "var(--v2-faint)" }}>{b.limiting}</p>
+                  )}
+                  <p className="text-[15px] leading-snug font-medium mt-0.5">{b.empowering || "(no replacement yet)"}</p>
+                  {domain && (
+                    <p className="text-[11px] mt-1" style={{ color: "var(--v2-faint)" }}>{domain.label}</p>
+                  )}
                 </div>
+                <button onClick={() => archive(b)} className="v2-press text-sm shrink-0" style={{ color: "var(--v2-faint)" }} aria-label="Remove">✕</button>
               </li>
             );
           })}

@@ -19,23 +19,9 @@ export const DOMAINS: { key: Domain; label: string }[] = [
   { key: "emotions", label: "Emotional life" },
 ];
 
-// Mirrors the NAC arc: you name the limiting belief, build leverage to change
-// it, interrupt the old pattern, install the new one, condition it, until it's
-// the new default ("installed").
-export type BeliefState =
-  | "named"
-  | "leverage"
-  | "interrupted"
-  | "conditioning"
-  | "installed";
-
-export const BELIEF_STATES: { key: BeliefState; label: string; hint: string }[] = [
-  { key: "named", label: "Named", hint: "You've seen it clearly." },
-  { key: "leverage", label: "Leverage", hint: "The pain of keeping it is real now." },
-  { key: "interrupted", label: "Interrupted", hint: "You've broken the old pattern at least once." },
-  { key: "conditioning", label: "Conditioning", hint: "You're rehearsing the new response." },
-  { key: "installed", label: "Installed", hint: "The new belief is the default." },
-];
+// Kept as a vestigial field on Belief (always "named" now). The old 5-stage
+// "advance" tracker was removed — it was self-reported busywork, not real signal.
+export type BeliefState = "named";
 
 export type Belief = {
   id?: number;

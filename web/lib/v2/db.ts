@@ -57,22 +57,48 @@ export async function saveV2Settings(patch: Partial<V2Settings>) {
   await vdb().settings.put({ ...current, ...patch, id: "default" });
 }
 
-/** Read-only convenience: pull the API key/base/model the user already set in v1. */
+/**
+ * Pull the API key/base/model the user already set in the v1 app.
+ *
+ * v1 and v2 are the same origin, so v1's IndexedDB is readable from here. We try
+ * the known v1 database name first, then fall back to scanning every IndexedDB
+ * database in this origin for a `settings` table with an `apiKey` — so it works
+ * even if the v1 db name ever differed. Read-only: nothing in v1 is modified.
+ */
 export async function importKeyFromV1(): Promise<boolean> {
-  try {
-    const old = await new Dexie("personal-power-ii").open();
-    const s = await old.table("settings").get("default");
-    old.close();
+  const apply = (s: { apiKey?: string; baseURL?: string; model?: string } | undefined) => {
     if (s?.apiKey) {
-      await saveV2Settings({
-        apiKey: s.apiKey,
-        baseURL: s.baseURL,
-        model: s.model,
-      });
-      return true;
+      return saveV2Settings({ apiKey: s.apiKey, baseURL: s.baseURL, model: s.model }).then(() => true);
+    }
+    return Promise.resolve(false);
+  };
+
+  const tryDb = async (name: string): Promise<boolean> => {
+    if (name === "personal-power-ii-v2") return false;
+    let dbx: Dexie | null = null;
+    try {
+      dbx = await new Dexie(name).open();
+      if (!dbx.tables.some((t) => t.name === "settings")) return false;
+      const s = await dbx.table("settings").get("default");
+      return await apply(s as { apiKey?: string } | undefined);
+    } catch {
+      return false;
+    } finally {
+      dbx?.close();
+    }
+  };
+
+  // 1. Known v1 name.
+  if (await tryDb("personal-power-ii")) return true;
+
+  // 2. Scan everything else in this origin.
+  try {
+    const list = (await indexedDB.databases?.()) ?? [];
+    for (const info of list) {
+      if (info.name && (await tryDb(info.name))) return true;
     }
   } catch {
-    /* v1 db absent or unreadable — fine */
+    /* indexedDB.databases() unsupported — the known-name attempt above is the fallback */
   }
   return false;
 }

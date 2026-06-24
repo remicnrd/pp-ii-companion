@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { loadDaysIndex, nextUnfinishedDay } from "@/lib/program";
 import { vdb, getV2Settings } from "@/lib/v2/db";
 import { arcForDay } from "@/lib/v2/journey";
-import { transformationProgress, todayISO, beliefStateMeta } from "@/lib/v2/selfModel";
+import { todayISO } from "@/lib/v2/selfModel";
 import type { ProgramDayMeta } from "@/lib/types";
 import type { Belief, V2Settings } from "@/lib/v2/types";
 import { Card, Label } from "@/components/v2/ui";
@@ -25,6 +25,7 @@ export default function V2Today() {
   const [primeStreak, setPrimeStreak] = useState(0);
   const [beliefs, setBeliefs] = useState<Belief[]>([]);
   const [completedCount, setCompletedCount] = useState(0);
+  const [totalDays, setTotalDays] = useState(20);
 
   useEffect(() => {
     (async () => {
@@ -39,6 +40,7 @@ export default function V2Today() {
       setSettings(s);
       setDay(idx.days.find((d) => d.day === dayNum) ?? null);
       setCompletedCount(completed.size);
+      setTotalDays(idx.days.length);
       setBeliefs(allBeliefs);
       setPrimedToday(primingDates.includes(todayISO()));
       setPrimeStreak(computeStreak(primingDates));
@@ -50,28 +52,24 @@ export default function V2Today() {
     return <div className="px-5 pt-20 text-center" style={{ color: "var(--v2-faint)" }}>…</div>;
   }
 
-  const progress = Math.round(transformationProgress(beliefs) * 100);
+  const sessionPct = totalDays ? Math.round((completedCount / totalDays) * 100) : 0;
   const arc = day ? arcForDay(day.day) : undefined;
-  const conditioning = beliefs
-    .filter((b) => b.state !== "installed")
-    .slice(0, 3);
+  const conditioning = beliefs.slice(0, 3);
 
   return (
     <div className="max-w-md mx-auto px-5 pt-12">
       <header className="mb-7 v2-rise">
-        <p className="text-sm" style={{ color: "var(--v2-muted)" }}>{greeting()}.</p>
-        <h1 className="text-[28px] font-semibold tracking-tight leading-tight mt-1">
-          {settings?.intentName ? (
-            <>You're becoming <span style={{ color: "var(--v2-accent)" }}>{settings.intentName}</span>.</>
-          ) : (
-            "Let's keep becoming."
-          )}
-        </h1>
+        <h1 className="text-[28px] font-semibold tracking-tight leading-tight">{greeting()}.</h1>
+        {settings?.intentName && (
+          <p className="text-sm mt-1.5" style={{ color: "var(--v2-muted)" }}>
+            Working toward <span style={{ color: "var(--v2-accent)" }}>{settings.intentName}</span>.
+          </p>
+        )}
         <div className="mt-4 flex items-center gap-3">
           <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
-            <div className="h-full rounded-full" style={{ width: `${Math.max(4, progress)}%`, background: "var(--v2-accent)", transition: "width .6s ease" }} />
+            <div className="h-full rounded-full" style={{ width: `${Math.max(4, sessionPct)}%`, background: "var(--v2-accent)", transition: "width .6s ease" }} />
           </div>
-          <span className="text-xs" style={{ color: "var(--v2-faint)" }}>{progress}% shifted</span>
+          <span className="text-xs" style={{ color: "var(--v2-faint)" }}>{completedCount}/{totalDays} sessions</span>
         </div>
       </header>
 
@@ -123,32 +121,16 @@ export default function V2Today() {
       <div className="v2-rise v2-rise-4">
         <Link href="/v2/you" className="block">
           <Card className="p-5 v2-press">
-            <Label>What you're rewiring</Label>
+            <Label>Beliefs you're changing</Label>
             {conditioning.length === 0 ? (
               <p className="text-sm mt-1" style={{ color: "var(--v2-muted)" }}>
                 Nothing named yet. A session will surface your first belief — or add one in You.
               </p>
             ) : (
-              <ul className="mt-2 space-y-3">
-                {conditioning.map((b) => {
-                  const meta = beliefStateMeta(b.state);
-                  return (
-                    <li key={b.id} className="flex items-start gap-3">
-                      <div className="flex gap-1 mt-1.5 shrink-0">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <span
-                            key={i}
-                            className={`v2-pip ${i <= ["named","leverage","interrupted","conditioning","installed"].indexOf(b.state) ? "v2-pip-on" : ""}`}
-                          />
-                        ))}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-sm leading-snug">{b.empowering}</p>
-                        <p className="text-[11px]" style={{ color: "var(--v2-faint)" }}>{meta.label}</p>
-                      </div>
-                    </li>
-                  );
-                })}
+              <ul className="mt-2 space-y-2.5">
+                {conditioning.map((b) => (
+                  <li key={b.id} className="text-sm leading-snug">{b.empowering || b.limiting}</li>
+                ))}
               </ul>
             )}
           </Card>
