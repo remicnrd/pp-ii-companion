@@ -179,16 +179,6 @@ details[open] > summary .chev { transform: rotate(90deg); }
 .v2-press { transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease; }
 .v2-press:active { transform: scale(0.97); }
 
-/* Thermostat / progress range input */
-.v2-range { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 999px;
-  background: linear-gradient(90deg, var(--v2-accent), hsl(calc(var(--v2-hue) + 60) 85% 62%));
-  outline: none; }
-.v2-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
-  width: 22px; height: 22px; border-radius: 50%; background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5); cursor: pointer; }
-.v2-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%;
-  background: #fff; border: none; box-shadow: 0 2px 10px rgba(0,0,0,0.5); cursor: pointer; }
-
 /* Breathing orb */
 .v2-breath {
   border-radius: 50%;
@@ -200,7 +190,3 @@ details[open] > summary .chev { transform: rotate(90deg); }
   0%, 100% { transform: scale(0.7); opacity: 0.7; }      /* exhale (≈4s feel) */
   45%      { transform: scale(1.12); opacity: 1; }       /* inhale */
 }
-
-/* Belief state pips */
-.v2-pip { width: 7px; height: 7px; border-radius: 50%; background: var(--v2-faint); }
-.v2-pip-on { background: var(--v2-accent); box-shadow: 0 0 8px -1px var(--v2-accent); }

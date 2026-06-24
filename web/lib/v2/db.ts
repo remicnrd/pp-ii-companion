@@ -5,7 +5,7 @@ import type {
   CoreValue,
   DayProgressV2,
   PrimingEntry,
-  Thermostat,
+  ThermostatArea,
   V2Settings,
 } from "./types";
 
@@ -18,7 +18,7 @@ import type {
 export class V2DB extends Dexie {
   settings!: Table<V2Settings, "default">;
   beliefs!: Table<Belief, number>;
-  thermostat!: Table<Thermostat, string>; // keyed by domain
+  thermoAreas!: Table<ThermostatArea, number>;
   values!: Table<CoreValue, number>;
   priming!: Table<PrimingEntry, string>; // keyed by date
   dayProgress!: Table<DayProgressV2, number>;
@@ -30,6 +30,19 @@ export class V2DB extends Dexie {
       settings: "id",
       beliefs: "++id, domain, state, archivedAt, createdAt",
       thermostat: "domain",
+      values: "++id, rank, createdAt",
+      priming: "date",
+      dayProgress: "day",
+      coachMessages: "++id, createdAt",
+    });
+    // v2: the old `thermostat` slider store is dropped (its 0–100 values were
+    // meaningless) and replaced by `thermoAreas` — setpoint gaps + conditioning.
+    // Every other table is untouched, so notes/progress/beliefs/values survive.
+    this.version(2).stores({
+      settings: "id",
+      beliefs: "++id, domain, state, archivedAt, createdAt",
+      thermostat: null,
+      thermoAreas: "++id, createdAt",
       values: "++id, rank, createdAt",
       priming: "date",
       dayProgress: "day",
@@ -126,9 +139,18 @@ export async function updateBelief(id: number, patch: Partial<Belief>) {
   await vdb().beliefs.update(id, { ...patch, updatedAt: Date.now() });
 }
 
-// ---------- thermostat ----------
-export async function setThermostat(domain: Thermostat["domain"], level: number, note?: string) {
-  await vdb().thermostat.put({ domain, level, note, updatedAt: Date.now() });
+// ---------- thermostat areas ----------
+export async function addThermoArea(
+  a: Omit<ThermostatArea, "id" | "createdAt" | "updatedAt">,
+) {
+  const now = Date.now();
+  return vdb().thermoAreas.add({ ...a, createdAt: now, updatedAt: now });
+}
+export async function updateThermoArea(id: number, patch: Partial<ThermostatArea>) {
+  await vdb().thermoAreas.update(id, { ...patch, updatedAt: Date.now() });
+}
+export async function deleteThermoArea(id: number) {
+  await vdb().thermoAreas.delete(id);
 }
 
 // ---------- priming ----------

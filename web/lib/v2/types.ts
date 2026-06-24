@@ -35,12 +35,18 @@ export type Belief = {
   archivedAt?: number;
 };
 
-// "The subconscious thermostat" — what you believe you deserve, per domain.
-// 0..100. The aurora warms as the average rises.
-export type Thermostat = {
-  domain: Domain;
-  level: number; // 0..100
-  note?: string;
+// Tony's "subconscious thermostat": the setpoint for what you'll let yourself
+// have in an area. Exceed it and you self-sabotage back down to it; only
+// conditioning moves the setpoint for real (willpower snaps back). So this isn't
+// a slider with a number — it's awareness of the gap (where it is vs where it
+// should be) plus the daily practice that actually resets it.
+export type ThermostatArea = {
+  id?: number;
+  area: string; // the area that matters, in your words (Money, Health, …)
+  current: string; // where the setpoint sits now, honestly
+  target: string; // where it needs to be
+  conditioning?: string; // the practice that raises it — so you don't forget to do it
+  createdAt: number;
   updatedAt: number;
 };
 

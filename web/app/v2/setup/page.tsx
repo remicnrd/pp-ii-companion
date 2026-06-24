@@ -88,7 +88,7 @@ export default function V2Setup() {
       _exportedAt: new Date().toISOString(),
       settings: await vdb().settings.toArray(),
       beliefs: await vdb().beliefs.toArray(),
-      thermostat: await vdb().thermostat.toArray(),
+      thermoAreas: await vdb().thermoAreas.toArray(),
       values: await vdb().values.toArray(),
       priming: await vdb().priming.toArray(),
       dayProgress: await vdb().dayProgress.toArray(),
@@ -131,7 +131,7 @@ export default function V2Setup() {
       const d = vdb();
       if (data.settings) await d.settings.bulkPut(data.settings);
       if (data.beliefs) await d.beliefs.bulkPut(data.beliefs);
-      if (data.thermostat) await d.thermostat.bulkPut(data.thermostat);
+      if (data.thermoAreas) await d.thermoAreas.bulkPut(data.thermoAreas);
       if (data.values) await d.values.bulkPut(data.values);
       if (data.priming) await d.priming.bulkPut(data.priming);
       if (data.dayProgress) await d.dayProgress.bulkPut(data.dayProgress);

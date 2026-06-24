@@ -23,7 +23,7 @@ const NAC_LABELS: Record<string, string> = {
 async function assembleSelfModel(): Promise<string> {
   const s = await getV2Settings();
   const beliefs = (await vdb().beliefs.toArray()).filter((b) => !b.archivedAt);
-  const thermo = await vdb().thermostat.toArray();
+  const thermo = await vdb().thermoAreas.toArray();
   const values = (await vdb().values.toArray()).sort((a, b) => a.rank - b.rank);
 
   const parts: string[] = [];
@@ -40,9 +40,16 @@ async function assembleSelfModel(): Promise<string> {
 
   if (thermo.length) {
     const lines = thermo
-      .map((t) => `- ${DOMAINS.find((d) => d.key === t.domain)?.label ?? t.domain}: ${t.level}/100`)
+      .map(
+        (t) =>
+          `- ${t.area || "(unnamed)"}: now "${t.current || "?"}" → should be "${t.target || "?"}"${
+            t.conditioning ? ` · conditioning: ${t.conditioning}` : ""
+          }`,
+      )
       .join("\n");
-    parts.push(`## What they believe they deserve, by area (0–100)\n${lines}`);
+    parts.push(
+      `## Their thermostat — setpoints they're aware of and working to raise\n${lines}`,
+    );
   }
 
   if (values.length) {

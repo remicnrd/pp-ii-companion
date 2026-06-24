@@ -3,21 +3,23 @@
 import { useEffect, useState } from "react";
 import {
   addBelief,
+  addThermoArea,
+  deleteThermoArea,
   getV2Settings,
   saveV2Settings,
-  setThermostat,
   updateBelief,
+  updateThermoArea,
   vdb,
 } from "@/lib/v2/db";
 import { DOMAINS } from "@/lib/v2/types";
-import type { Belief, CoreValue, Domain } from "@/lib/v2/types";
+import type { Belief, CoreValue, Domain, ThermostatArea } from "@/lib/v2/types";
 import { Btn, Card, Field, Label, notifySelfModelChanged } from "@/components/v2/ui";
 
 export default function YouPage() {
   const [loaded, setLoaded] = useState(false);
   const [intent, setIntent] = useState("");
   const [beliefs, setBeliefs] = useState<Belief[]>([]);
-  const [thermo, setThermo] = useState<Record<string, number>>({});
+  const [areas, setAreas] = useState<ThermostatArea[]>([]);
   const [values, setValues] = useState<CoreValue[]>([]);
 
   const [addingBelief, setAddingBelief] = useState(false);
@@ -32,8 +34,7 @@ export default function YouPage() {
     const s = await getV2Settings();
     setIntent(s.intentName ?? "");
     setBeliefs((await vdb().beliefs.toArray()).filter((b) => !b.archivedAt).sort((a, b) => a.createdAt - b.createdAt));
-    const t = await vdb().thermostat.toArray();
-    setThermo(Object.fromEntries(t.map((r) => [r.domain, r.level])));
+    setAreas((await vdb().thermoAreas.toArray()).sort((a, b) => a.createdAt - b.createdAt));
     setValues((await vdb().values.toArray()).sort((a, b) => a.rank - b.rank || a.createdAt - b.createdAt));
   }
 
@@ -44,10 +45,25 @@ export default function YouPage() {
     })();
   }, []);
 
-  async function changeThermo(domain: Domain, level: number) {
-    setThermo((t) => ({ ...t, [domain]: level }));
-    await setThermostat(domain, level);
-    notifySelfModelChanged();
+  function editArea(id: number, key: keyof ThermostatArea, val: string) {
+    setAreas((prev) => prev.map((a) => (a.id === id ? { ...a, [key]: val } : a)));
+  }
+  async function persistArea(a: ThermostatArea) {
+    if (!a.id) return;
+    await updateThermoArea(a.id, {
+      area: a.area,
+      current: a.current,
+      target: a.target,
+      conditioning: a.conditioning,
+    });
+  }
+  async function addArea() {
+    await addThermoArea({ area: "", current: "", target: "", conditioning: "" });
+    await refresh();
+  }
+  async function removeArea(id: number) {
+    await deleteThermoArea(id);
+    await refresh();
   }
 
   async function archive(b: Belief) {
@@ -112,28 +128,41 @@ export default function YouPage() {
 
       {/* Thermostat */}
       <Card className="p-5 mb-4 v2-rise v2-rise-2">
-        <Label>The thermostat — what you believe you deserve</Label>
-        <p className="text-sm mb-4" style={{ color: "var(--v2-muted)" }}>Set each one honestly — it's the setpoint you quietly defend. Naming it is the first step to raising it.</p>
-        <div className="space-y-4">
-          {DOMAINS.map((d) => {
-            const level = thermo[d.key] ?? 25;
-            return (
-              <div key={d.key}>
-                <div className="flex justify-between text-sm mb-1.5">
-                  <span>{d.label}</span>
-                  <span style={{ color: "var(--v2-faint)" }}>{level}</span>
-                </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={100}
-                  value={level}
-                  onChange={(e) => changeThermo(d.key, Number(e.target.value))}
-                  className="v2-range w-full"
-                />
+        <Label>The thermostat — what you let yourself have</Label>
+        <p className="text-sm mb-4" style={{ color: "var(--v2-muted)" }}>
+          Tony's idea: each area has a setpoint. Go past it and you quietly sabotage back down to it. Willpower won't hold a new level — only conditioning does. So name where it sits, where it should be, and the daily rep that resets it.
+        </p>
+        <div className="space-y-3">
+          {areas.map((a) => (
+            <div
+              key={a.id}
+              className="rounded-2xl p-3.5"
+              style={{ background: "var(--v2-glass)", border: "1px solid var(--v2-line)" }}
+            >
+              <input
+                value={a.area}
+                onChange={(e) => editArea(a.id!, "area", e.target.value)}
+                onBlur={() => persistArea(a)}
+                placeholder="Area — e.g. Money, Health, Work"
+                className="w-full bg-transparent text-[15px] font-medium focus:outline-none mb-2.5"
+                style={{ color: "var(--v2-ink)" }}
+              />
+              <div className="space-y-2">
+                <Field value={a.current} onChange={(v) => editArea(a.id!, "current", v)} onBlur={() => persistArea(a)} placeholder="Where it sits now — honestly" multiline rows={2} />
+                <Field value={a.target} onChange={(v) => editArea(a.id!, "target", v)} onBlur={() => persistArea(a)} placeholder="Where it should be" multiline rows={2} />
+                <Field value={a.conditioning ?? ""} onChange={(v) => editArea(a.id!, "conditioning", v)} onBlur={() => persistArea(a)} placeholder="The daily rep that raises it — so you don't forget to condition" multiline rows={2} />
               </div>
-            );
-          })}
+              <button onClick={() => removeArea(a.id!)} className="text-[11px] mt-2.5 v2-press" style={{ color: "var(--v2-faint)" }}>
+                Remove area
+              </button>
+            </div>
+          ))}
+          {areas.length === 0 && (
+            <p className="text-sm" style={{ color: "var(--v2-muted)" }}>No areas yet. Add the ones where you sense a ceiling.</p>
+          )}
+        </div>
+        <div className="mt-3">
+          <Btn onClick={addArea}>+ Add an area</Btn>
         </div>
       </Card>
 
