@@ -11,6 +11,7 @@ import {
   updateThermoArea,
   vdb,
 } from "@/lib/v2/db";
+import { streakFromDates } from "@/lib/v2/selfModel";
 import { DOMAINS } from "@/lib/v2/types";
 import type { Belief, CoreValue, Domain, ThermostatArea } from "@/lib/v2/types";
 import { Btn, Card, Field, Label, notifySelfModelChanged } from "@/components/v2/ui";
@@ -208,6 +209,7 @@ export default function YouPage() {
         <ul className="space-y-4 mt-2">
           {beliefs.map((b) => {
             const domain = DOMAINS.find((d) => d.key === b.domain);
+            const st = streakFromDates(b.conditionedDates ?? []);
             return (
               <li key={b.id} className="pt-1 flex items-start gap-3">
                 <div className="flex-1 min-w-0">
@@ -215,9 +217,10 @@ export default function YouPage() {
                     <p className="text-sm line-through" style={{ color: "var(--v2-faint)" }}>{b.limiting}</p>
                   )}
                   <p className="text-[15px] leading-snug font-medium mt-0.5">{b.empowering || "(no replacement yet)"}</p>
-                  {domain && (
-                    <p className="text-[11px] mt-1" style={{ color: "var(--v2-faint)" }}>{domain.label}</p>
-                  )}
+                  <p className="text-[11px] mt-1" style={{ color: "var(--v2-faint)" }}>
+                    {domain?.label}
+                    {st > 0 && `${domain ? " · " : ""}conditioned ${st} day${st > 1 ? "s" : ""} running`}
+                  </p>
                 </div>
                 <button onClick={() => archive(b)} className="v2-press text-sm shrink-0" style={{ color: "var(--v2-faint)" }} aria-label="Remove">✕</button>
               </li>

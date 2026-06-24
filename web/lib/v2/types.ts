@@ -30,6 +30,8 @@ export type Belief = {
   empowering: string;
   state: BeliefState;
   sourceDay?: number; // program day that surfaced it
+  /** ISO dates (YYYY-MM-DD) the user conditioned this belief — the daily NAC reps. */
+  conditionedDates?: string[];
   createdAt: number;
   updatedAt: number;
   archivedAt?: number;

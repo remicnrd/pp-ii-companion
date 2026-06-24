@@ -133,10 +133,33 @@ export async function saveDayProgressV2(p: DayProgressV2) {
 // ---------- beliefs ----------
 export async function addBelief(b: Omit<Belief, "id" | "createdAt" | "updatedAt">) {
   const now = Date.now();
-  return vdb().beliefs.add({ ...b, createdAt: now, updatedAt: now });
+  return vdb().beliefs.add({ conditionedDates: [], ...b, createdAt: now, updatedAt: now });
 }
 export async function updateBelief(id: number, patch: Partial<Belief>) {
   await vdb().beliefs.update(id, { ...patch, updatedAt: Date.now() });
+}
+
+/** Log today's conditioning rep for a belief. Idempotent. */
+export async function markConditioned(id: number, on?: string) {
+  const date = on ?? new Date().toISOString().slice(0, 10);
+  const b = await vdb().beliefs.get(id);
+  if (!b) return;
+  const dates = b.conditionedDates ?? [];
+  if (!dates.includes(date)) {
+    await vdb().beliefs.update(id, {
+      conditionedDates: [...dates, date].sort(),
+      updatedAt: Date.now(),
+    });
+  }
+}
+
+/** Undo today's conditioning rep for a belief. */
+export async function unmarkConditioned(id: number, on?: string) {
+  const date = on ?? new Date().toISOString().slice(0, 10);
+  const b = await vdb().beliefs.get(id);
+  if (!b) return;
+  const dates = (b.conditionedDates ?? []).filter((d) => d !== date);
+  await vdb().beliefs.update(id, { conditionedDates: dates, updatedAt: Date.now() });
 }
 
 // ---------- thermostat areas ----------

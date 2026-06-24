@@ -1,6 +1,7 @@
 import { loadDaysIndex, loadDay, loadFrameworks, nextUnfinishedDay } from "@/lib/program";
 import { arcForDay, DAY_ARC, PHASES } from "./journey";
 import { getV2Settings, vdb } from "./db";
+import { streakFromDates } from "./selfModel";
 import { DOMAINS } from "./types";
 import type { ProgramDay } from "@/lib/types";
 
@@ -33,7 +34,14 @@ async function assembleSelfModel(): Promise<string> {
   if (beliefs.length) {
     const lines = beliefs.map((b) => {
       const dom = DOMAINS.find((d) => d.key === b.domain)?.label ?? b.domain;
-      return `- [${dom}] ${b.limiting ? `old: "${b.limiting}" → ` : ""}new: "${b.empowering}"`;
+      const st = streakFromDates(b.conditionedDates ?? []);
+      const reps = (b.conditionedDates ?? []).length;
+      const rep = st > 0
+        ? ` · conditioned ${st}d running`
+        : reps
+          ? " · named but not conditioned lately"
+          : " · named, not yet conditioned";
+      return `- [${dom}] ${b.limiting ? `old: "${b.limiting}" → ` : ""}new: "${b.empowering}"${rep}`;
     });
     parts.push(`## Beliefs they're rewiring\n${lines.join("\n")}`);
   }

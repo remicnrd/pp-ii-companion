@@ -3,9 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { loadDaysIndex, nextUnfinishedDay } from "@/lib/program";
-import { vdb, getV2Settings } from "@/lib/v2/db";
+import { vdb, getV2Settings, markConditioned, unmarkConditioned } from "@/lib/v2/db";
 import { arcForDay } from "@/lib/v2/journey";
-import { todayISO } from "@/lib/v2/selfModel";
+import {
+  todayISO,
+  streakFromDates,
+  conditioningDates,
+  conditionedOn,
+} from "@/lib/v2/selfModel";
 import type { ProgramDayMeta } from "@/lib/types";
 import type { Belief, V2Settings } from "@/lib/v2/types";
 import { Card, Label } from "@/components/v2/ui";
@@ -35,7 +40,7 @@ export default function V2Today() {
       const completed = new Set(progress.filter((p) => p.completedAt).map((p) => p.day));
       const dayNum = nextUnfinishedDay(completed, idx.days.length);
       const allBeliefs = (await vdb().beliefs.toArray()).filter((b) => !b.archivedAt);
-      const primingDates = (await vdb().priming.toArray()).map((p) => p.date).sort();
+      const primingDates = (await vdb().priming.toArray()).map((p) => p.date);
 
       setSettings(s);
       setDay(idx.days.find((d) => d.day === dayNum) ?? null);
@@ -43,10 +48,23 @@ export default function V2Today() {
       setTotalDays(idx.days.length);
       setBeliefs(allBeliefs);
       setPrimedToday(primingDates.includes(todayISO()));
-      setPrimeStreak(computeStreak(primingDates));
+      setPrimeStreak(streakFromDates(primingDates));
       setLoading(false);
     })();
   }, []);
+
+  const iso = todayISO();
+
+  async function toggleConditioned(b: Belief) {
+    if (!b.id) return;
+    const has = conditionedOn(b, iso);
+    const next = has
+      ? (b.conditionedDates ?? []).filter((d) => d !== iso)
+      : [...(b.conditionedDates ?? []), iso].sort();
+    setBeliefs((prev) => prev.map((x) => (x.id === b.id ? { ...x, conditionedDates: next } : x)));
+    if (has) await unmarkConditioned(b.id);
+    else await markConditioned(b.id);
+  }
 
   if (loading) {
     return <div className="px-5 pt-20 text-center" style={{ color: "var(--v2-faint)" }}>…</div>;
@@ -54,7 +72,10 @@ export default function V2Today() {
 
   const sessionPct = totalDays ? Math.round((completedCount / totalDays) * 100) : 0;
   const arc = day ? arcForDay(day.day) : undefined;
-  const conditioning = beliefs.slice(0, 3);
+
+  const doneCount = beliefs.filter((b) => conditionedOn(b, iso)).length;
+  const allDone = beliefs.length > 0 && doneCount === beliefs.length;
+  const showUpStreak = streakFromDates(conditioningDates(beliefs));
 
   return (
     <div className="max-w-md mx-auto px-5 pt-12">
@@ -73,30 +94,76 @@ export default function V2Today() {
         </div>
       </header>
 
-      {/* Priming — the daily ritual */}
-      <Link href="/v2/priming" className="block mb-4 v2-rise v2-rise-2">
-        <Card className="p-5 v2-press">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <Label>Daily priming · ~10 min</Label>
-              <p className="text-lg font-semibold mt-0.5">
-                {primedToday ? "Primed for today" : "Begin today's priming"}
-              </p>
-              <p className="text-sm mt-1" style={{ color: "var(--v2-muted)" }}>
-                {primedToday
-                  ? "The state is set. Carry it."
-                  : "Breathe, feel gratitude, send strength, see three wins as done."}
-              </p>
-            </div>
-            <div className="text-right shrink-0">
-              <div className="text-2xl">{primedToday ? "✓" : "◎"}</div>
-              {primeStreak > 0 && (
-                <div className="text-xs mt-1" style={{ color: "var(--v2-accent)" }}>{primeStreak}-day streak</div>
-              )}
-            </div>
+      {/* Daily conditioning — the practice that makes it stick */}
+      <section className="mb-4 v2-rise v2-rise-2">
+        <Card className="p-5">
+          <div className="flex items-center justify-between">
+            <Label>Today&apos;s conditioning</Label>
+            {showUpStreak > 0 && (
+              <span className="text-xs font-medium" style={{ color: "var(--v2-accent)" }}>🔥 {showUpStreak}</span>
+            )}
           </div>
+
+          {beliefs.length === 0 ? (
+            <p className="text-sm mt-1.5" style={{ color: "var(--v2-muted)" }}>
+              Nothing to condition yet. Name the belief you&apos;re changing in a{" "}
+              <Link href={day ? `/v2/program/${day.day}` : "/v2/journey"} style={{ color: "var(--v2-accent)" }}>session</Link>{" "}
+              or in <Link href="/v2/you" style={{ color: "var(--v2-accent)" }}>You</Link>.
+            </p>
+          ) : (
+            <>
+              <p className="text-sm mt-1 mb-3" style={{ color: "var(--v2-muted)" }}>
+                Say each one like it&apos;s already true — out loud if you can, and feel it. Don&apos;t just read it.
+              </p>
+              <ul className="space-y-2.5">
+                {beliefs.map((b) => {
+                  const done = conditionedOn(b, iso);
+                  const st = streakFromDates(b.conditionedDates ?? []);
+                  return (
+                    <li key={b.id} className="flex items-start gap-3">
+                      <button
+                        onClick={() => toggleConditioned(b)}
+                        aria-label={done ? "Undo today" : "Mark conditioned"}
+                        className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs v2-press mt-0.5"
+                        style={
+                          done
+                            ? { background: "var(--v2-accent)", color: "#0a0a0a" }
+                            : { border: "1.5px solid var(--v2-line)", color: "var(--v2-faint)" }
+                        }
+                      >
+                        {done ? "✓" : ""}
+                      </button>
+                      <div className="min-w-0 flex-1">
+                        <p
+                          className="text-[15px] leading-snug"
+                          style={{ color: done ? "var(--v2-faint)" : "var(--v2-ink)" }}
+                        >
+                          {b.empowering || b.limiting}
+                        </p>
+                        {st > 1 && (
+                          <p className="text-[11px] mt-0.5" style={{ color: "var(--v2-faint)" }}>
+                            {st} days running
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="text-xs mt-3" style={{ color: allDone ? "var(--v2-accent)" : "var(--v2-faint)" }}>
+                {allDone
+                  ? "Done for today. This is how it sticks — see you tomorrow."
+                  : `${doneCount}/${beliefs.length} conditioned`}
+              </p>
+              <div className="mt-2">
+                <Link href="/v2/you" className="text-[11px] v2-press" style={{ color: "var(--v2-faint)" }}>
+                  Manage beliefs →
+                </Link>
+              </div>
+            </>
+          )}
         </Card>
-      </Link>
+      </section>
 
       {/* Today's session */}
       {day && (
@@ -117,25 +184,25 @@ export default function V2Today() {
         </Link>
       )}
 
-      {/* What you're working on */}
-      <div className="v2-rise v2-rise-4">
-        <Link href="/v2/you" className="block">
-          <Card className="p-5 v2-press">
-            <Label>Beliefs you're changing</Label>
-            {conditioning.length === 0 ? (
-              <p className="text-sm mt-1" style={{ color: "var(--v2-muted)" }}>
-                Nothing named yet. A session will surface your first belief — or add one in You.
+      {/* Priming — optional morning ritual */}
+      <Link href="/v2/priming" className="block mb-4 v2-rise v2-rise-4">
+        <Card className="p-4 v2-press">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <Label>Priming · optional · ~10 min</Label>
+              <p className="text-sm mt-0.5" style={{ color: "var(--v2-muted)" }}>
+                {primedToday ? "Primed for today. The state is set." : "Breathe, feel it, see three wins as done."}
               </p>
-            ) : (
-              <ul className="mt-2 space-y-2.5">
-                {conditioning.map((b) => (
-                  <li key={b.id} className="text-sm leading-snug">{b.empowering || b.limiting}</li>
-                ))}
-              </ul>
-            )}
-          </Card>
-        </Link>
-      </div>
+            </div>
+            <div className="text-right shrink-0">
+              <div className="text-xl">{primedToday ? "✓" : "◎"}</div>
+              {primeStreak > 0 && (
+                <div className="text-[11px] mt-0.5" style={{ color: "var(--v2-accent)" }}>{primeStreak}d</div>
+              )}
+            </div>
+          </div>
+        </Card>
+      </Link>
 
       <div className="mt-6 text-center">
         <Link href="/v2/setup" className="text-xs" style={{ color: "var(--v2-faint)" }}>
@@ -144,20 +211,4 @@ export default function V2Today() {
       </div>
     </div>
   );
-}
-
-function computeStreak(datesSorted: string[]): number {
-  if (!datesSorted.length) return 0;
-  const set = new Set(datesSorted);
-  let streak = 0;
-  const d = new Date();
-  if (!set.has(d.toISOString().slice(0, 10))) d.setDate(d.getDate() - 1);
-  for (;;) {
-    const iso = d.toISOString().slice(0, 10);
-    if (set.has(iso)) {
-      streak++;
-      d.setDate(d.getDate() - 1);
-    } else break;
-  }
-  return streak;
 }
